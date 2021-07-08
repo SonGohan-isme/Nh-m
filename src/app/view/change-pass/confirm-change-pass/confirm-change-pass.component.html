@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body" style="display: flex;">
+                <form (ngSubmit)="onSubmit(changePassForm)" #changePassForm="ngForm" class="card-body">
+                    <div class="input-field">
+                        <p>Mật khẩu mới:</p>
+                        <input type="password" class="form-control" placeholder="Mật Khẩu Mới" name="pass" ngModel>
+                    </div>
+                    <div class="input-field">
+                        <p>Xác nhận mật khẩu mới:</p>
+                        <input type="password" class="form-control" placeholder="Xác nhận mật khẩu mới" name="confirmPass" ngModel>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Xác Nhận</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+</body>
+
+</html>

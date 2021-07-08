@@ -1,0 +1,36 @@
+<mat-dialog-content class="mat-typography">
+    <div class="col-12">
+        <div class="card-header">
+            <h2><b>Form Xét Duyệt</b></h2>
+        </div>
+        <form #reviewForm="ngForm">
+            <table class="table">
+
+                <tr>
+                    <th>Quyết Định Xét Duyệt</th>
+                    <td>
+                        <select class="custom-select" [(ngModel)]="approveStatus" name="approveStatus">
+                            <option value="DD">Chấp Nhận</option>
+                            <option value="YCT">Yêu Cầu Bổ Sung</option>
+                            <option value="TC">Từ Chối</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Ghi Chú</th>
+                    <td><textarea class="form-control" rows="3"  maxlength="2000" placeholder="Enter ..."
+                            name="description" [(ngModel)]="description" #note="ngModel" required>
+                        <span id="errorMessagename" style="color: red;" *ngIf="note.errors?.required && note.touched">Ghi Chú không được để trống</span>
+                                    
+                    </textarea>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Hủy</button>
+    <button mat-button mat-dialog-close [disabled]="reviewForm.invalid" type="submit" (click)="Review()">Lưu</button>
+</mat-dialog-actions>

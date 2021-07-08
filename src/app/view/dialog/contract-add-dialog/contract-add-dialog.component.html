@@ -1,0 +1,69 @@
+<mat-dialog-content class="mat-typography">
+    <div>
+        <div>
+            <div>
+                <form>
+                    <div class="card-body" style="height: 608px; width: 1000px;">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mã Khách Hàng</label>
+                            <select class="form-control" name="customerinfos" (change)="getAllIllustByCustID(cust.value)" #cust>
+                                <option [value]=-1>Lựa Chọn Khách Hàng</option>
+                                <option *ngFor="let custInfo of customerinfos"  [value]="custInfo.id">{{custInfo.full_name}} ({{custInfo.code}})</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mã Bảng Minh Họa</label>
+                            <select class="form-control disabled" [(ngModel)]="illustrationId" id="illustrationId" name="illustrationId" (change)="onchangeValue()">
+                                <option [value]=-1>Lựa Chọn Bảng Minh Họa</option>
+                                <option *ngFor="let illustration of illustrations" [value]="illustration.id" >#BMH{{illustration.id}}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tên Chủ Hợp Đồng</label>
+                            <input type="email" class="form-control" name="contractOwnerName" [(ngModel)]="contract.name_contract_owner" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Kỳ Hạn</label>
+                            <input class="form-control" type="text" name="payment_period" value="{{ payment_period }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Loại Bảo Hiểm</label>
+                            <input type="email" class="form-control" name="insuranceType" id="insuranceType" value="{{ contract.insurance_type }}" readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Mã Quyền lợi chính</label>
+                            <input type="email" class="form-control" name="insuranceId" value="#G{{ contract.id_main_benifit }}" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tổng Số Tiền Phải Trả</label>
+                            <input type="email" class="form-control" name="totalPayment" value="{{ contract.contract_total_value.toLocaleString() }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày Đăng Ký</label>
+                            <input type="date" class="form-control" name="signDate" [(ngModel)]="contract.start_time">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày Hết Hạn</label>
+                            <input type="date" class="form-control" name="outOfDate" id="endTime" [(ngModel)]="contract.end_time" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Tình trạng hoạt động</label>
+                            <input type="text" class="form-control" name="status" value="{{contract.status == false? 'Chưa Hoạt Động':'Đang Hoạt Động'}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Tình trạng xét duyệt</label>
+                            <input type="text" class="form-control" name="approval_status" value="{{ contract.approval_status=='CXD'? 'Chưa Xét Duyệt' : '' }}" readonly>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Hủy</button>
+    <button mat-button mat-dialog-close type="submit" (click)="onSubmit()">Lưu</button>
+</mat-dialog-actions>

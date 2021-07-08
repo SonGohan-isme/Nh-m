@@ -1,0 +1,19 @@
+input#file {
+    display: inline-block;
+    width: 20%;
+    padding: 59px 0 0 0;
+    height: 25px;
+    overflow: hidden;
+    box-sizing: border-box;
+    background: url('../../../../assets/images/upload.png') center center no-repeat #e4e4e4;
+    border-radius: 15px;
+    background-size: 50px 50px;
+}
+.list-file {
+    background: #ff8405e3;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+}

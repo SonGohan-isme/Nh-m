@@ -1,0 +1,11 @@
+input {
+    border-color: darkslategrey;
+}
+
+select {
+    border-color: darkslategrey;
+}
+
+textarea {
+    border-color: darkslategrey;
+} 

@@ -1,0 +1,174 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="height: fit-content; width: 800px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>THÔNG TIN CHI TIẾT BẢN MINH HOẠ</h1>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2><b>Thông Tin Bên Mua Bảo Hiểm</b></h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Họ Và Tên</th>
+                                <td>{{illustration.illustrationMainBenifit.full_name_insurance_buyer}}</td>
+                            </tr>
+                            <tr>
+                                <th>Mối Quan Hệ Với NĐBH Sản Phẩm Chính</th>
+                                <td>{{illustration.illustrationMainBenifit.insurance_buyer_relation_insured_person}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2><b>Người Được Bảo Hiểm Của Hợp Đồng Chính</b></h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Họ Và Tên</th>
+                                <td>{{illustration.illustrationMainBenifit.full_name_insured_person}}</td>
+                            </tr>
+                            <tr>
+                                <th>Nhóm Nghề</th>
+                                <td>{{illustration.illustrationMainBenifit.carrier_group_insured_person}}</td>
+                            </tr>
+                            <tr>
+                                <th>Ngày Sinh</th>
+                                <td>{{illustration.illustrationMainBenifit.birth_date_insured_person | date:'dd-MM-yyyy'}}</td>
+                            </tr>
+                            <tr>
+                                <th>Giới Tính</th>
+                                <td>
+                                    <span *ngIf="illustration.illustrationMainBenifit.gender_insured_person">Nam</span>
+                                    <span *ngIf="!illustration.illustrationMainBenifit.gender_insured_person">Nữ</span>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2><b>Thông Tin Hợp Đồng Chính</b></h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Chương Trình</th>
+                                <td>{{illustration.benifit_name}}</td>
+                            </tr>
+                            <tr>
+                                <th>Thời Hạn</th>
+                                <td *ngIf="illustration.payment_period_id==4">Tháng</td>
+                                <td *ngIf="illustration.payment_period_id==3">Quý</td>
+                                <td *ngIf="illustration.payment_period_id==2">Nửa năm</td>
+                                <td *ngIf="illustration.payment_period_id==1">Năm</td>
+                            </tr>
+                            <tr>
+                                <th>Số Tiền Bảo Hiểm (VNĐ)</th>
+                                <td>{{illustration.illustrationMainBenifit.denominations | currency : "VND"}}</td>
+                            </tr>
+                            <tr>
+                                <th>Phí Bảo Hiểm (VNĐ)</th>
+                                <td>{{illustration.illustrationMainBenifit.fee_value | currency : "VND"}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12" *ngFor="let RelatedPerSonInfo of listRelatedPerSonInfo">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2><b>Bảo Hiểm Bổ Sung của {{RelatedPerSonInfo.full_name_insured_persion_extra}}</b></h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Họ Và Tên</th>
+                                <td>{{RelatedPerSonInfo.full_name_insured_persion_extra}}</td>
+                            </tr>
+                            <tr>
+                                <th>Mối Quan hệ với NĐBH sản phẩm chính</th>
+                                <td>{{RelatedPerSonInfo.insurance_buyer_relation_extra_insured_person}}</td>
+                            </tr>
+                            <tr>
+                                <th>Ngày Sinh</th>
+                                <td>{{RelatedPerSonInfo.dob_extra_insured_person | date:'dd-MM-yyyy'}}</td>
+                            </tr>
+                            <tr>
+                                <th>Giới Tính</th>
+                                <td>
+                                    <span *ngIf="RelatedPerSonInfo.gender_extra_insured_person">Nam</span>
+                                    <span *ngIf="!RelatedPerSonInfo.gender_extra_insured_person">Nữ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Nhóm Nghề</th>
+                                <td>{{RelatedPerSonInfo.carrier_group_extra_insured_person}}</td>
+                            </tr>
+                        </table>
+
+
+                        <div class="card-header">
+                            <h2>
+                                <b>Thông Tin Quyền Lợi Bảo Hiểm Bổ Sung </b>
+                            </h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Tên Quyền Lợi</th>
+                                <th>Nhóm Nghề Nghiệp</th>
+                                <th>Số Tiền Bảo Hiểm</th>
+                                <th>Phí Bảo Hiểm</th>
+                            </tr>
+                            <tr *ngFor="let detail of RelatedPerSonInfo.listSubInterset">
+                                <td>{{subBenifitList[detail.id_sub_benifit - 1].benifit_name}}</td>
+                                <td>{{detail.carrier_group_extra_insured_person}}</td>
+                                <td>{{detail.denominations | currency : "VND"}}</td>
+                                <td>{{detail.fee_value | currency : "VND"}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2><b>Tổng Phí Bảo Hiểm</b></h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>{{illustration.total_fee | currency : "VND"}}</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

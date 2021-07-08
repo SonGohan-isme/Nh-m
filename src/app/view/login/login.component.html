@@ -1,0 +1,33 @@
+<body class="login-page custom-login">
+    <div class="card-custom">
+        <div style="text-align: center;">
+            <img src="../../../assets/images/favicon.png" style="width: 37%;
+            padding: 10px;">
+        </div>
+        <form (ngSubmit)="onSubmit(signInForm)" #signInForm="ngForm" style="margin-top: 19px;">
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Mã Đăng Nhập" id="code" name="code" ngModel/>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Mật Khẩu" id="pass" name="pass" ngModel/>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 btn-custom">
+                <button class="btn btn-primary" type="submit" style="width: 100%;">Đăng Nhập</button>
+            </div>
+            <p class="mb-1 forget-pass">
+                <a [routerLink]="['/forget-password']" style="color: white;">Đặt Lại Mật Khẩu</a>
+            </p>
+        </form>
+    </div>
+    <!-- /.login-box -->
+</body>

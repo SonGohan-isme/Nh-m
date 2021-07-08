@@ -1,0 +1,60 @@
+.nav-height {
+    min-height: 50px !important;
+    height: 50px !important;
+    background-color: gray;
+    color: white;
+}
+
+.content-move-right {
+    margin-left: 278px !important;
+    transition: ease 0.2s;
+}
+
+.content-move-left {
+    margin-left: 0px !important;
+    transition: ease 0.1s;
+}
+
+.active-link {
+    background: blue;
+    color: white;
+}
+
+.mat-button:hover {
+    background: blue;
+    color: white;
+}
+
+.imglink {
+    border-radius: 50%;
+    float: left;
+    line-height: .8;
+    margin-left: .8rem;
+    margin-right: .5rem;
+    margin-top: -3px;
+    max-height: 33px;
+    width: auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23)!important;
+}
+
+@media print {
+    /* style sheet for print goes here */
+    .noprint {
+        visibility: hidden;
+    }
+}
+
+.fixed-toolbar {
+    z-index: 10000;
+    top: 0;
+    position: sticky;
+}
+
+mat-sidenav-content {
+    overflow: hidden;
+}
+
+
+/* .nav-list-fixed {
+    padding-top: 67px;
+} */

@@ -1,0 +1,25 @@
+<mat-dialog-content class="mat-typography">
+    <form #pauseReason="ngForm">
+        <div class="card-body" style="display:grid">
+            <h3>Tạm ngưng nhân viên</h3>
+            <i style="color: red;">Lý Do Tạm Ngưng</i>
+            <textarea class="form-control" id="textarea" style="width: 600px;height: 100px;" [(ngModel)]="description" name="reasontext" #reasonText="ngModel" required></textarea>
+            <!-- <span id="errorMessagename" style="color: red;" *ngIf="reasonText.errors?.required && reasonText.touched">Lí do không được để trống</span> -->
+            <label for="saler">Nhân viên chuyển giao:</label>
+            <select name="salerId" id="saler" class="form-control">
+                <option  *ngFor="let item of employeeAcc" [value]="item.code">{{item.code}}</option>
+            </select>
+
+            <h2>Tải lên các giấy tờ cần thiết </h2>       
+            <p *ngFor="let file of selectedFile ; index as i" class="list-file">{{ file.name }} &nbsp;&nbsp;
+                <span (click)="removeFile(i)" style="padding: 5px;"><i class="fas fa-times" style="color: gray;"></i></span>
+            </p>
+            <input id="file" type="file" (change)="onChangeFile($event)">
+            <button (click)="onUpload()" [disabled]="pauseReason.invalid" class="btn">GỬI</button>
+        </div>
+    </form>
+</mat-dialog-content>
+<!-- <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Hủy</button>
+    <button mat-button [disabled]="pauseReason.invalid" id="sendButton" (click)="PauseEmployee()">Gửi</button>
+</mat-dialog-actions> -->

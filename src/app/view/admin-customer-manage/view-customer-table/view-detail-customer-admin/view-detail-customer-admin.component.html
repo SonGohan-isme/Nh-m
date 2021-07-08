@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-12">
+                            <div class="card" style="margin-bottom: 6%;">
+                                <div class="card-body">
+                                    <mat-tab-group>
+                                        <mat-tab label="Thông tin Cơ Bản">
+                                            <div class="row">
+                                                <div class=" col-6 ">
+                                                    <h3>Thông tin Cơ Bản</h3>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Nguồn</label>
+                                                        <p style="color: red; ">{{ customerInfo.source }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputPassword1 ">Ngày Cập Nhật</label>
+                                                        <p style="color: red; ">{{ customerInfo.updated_time | date: 'dd-MM-yyyy' }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputPassword1 ">Mã Hợp Đồng</label>
+                                                        <p style="color: red; ">
+                                                            <a *ngFor="let item of custInfoList" (click)="openDialogContractDetail(item.id_contract)"> #HD{{ item.id_contract }}&nbsp;,</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputPassword1 ">Mã Bản Minh Họa Tương Ứng</label>
+                                                        <p style="color: red; ">
+                                                            <a *ngFor="let item of custInfoList" (click)="openDialogIllustrationDetail(item.id_illustration)"> #BMH{{ item.id_illustration }}&nbsp;,</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputPassword1 ">Mã Khách Hàng</label>
+                                                        <p style="color: red; ">#KH{{ customerInfo.id }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Họ Tên</label>
+                                                        <p style="color: red; ">{{ customerInfo.full_name }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Giới Tính</label>
+                                                        <p style="color: red; ">{{ customerInfo.gender==1? "Nam":"Nữ" }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Tình Trạng Hôn Nhân</label>
+                                                        <p style="color: red; ">Chưa Kết Hôn</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Ngày Sinh</label>
+                                                        <p style="color: red; ">{{ customerInfo.birth_address }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Tuổi</label>
+                                                        <p style="color: red; ">{{ customerInfo.age }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Nơi Sinh</label>
+                                                        <p style="color: red; ">{{ customerInfo.curadd_city }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Loại Giấy Tờ Tùy Thân</label>
+                                                        <p style="color: red; ">{{ customerInfo.types_identification }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Giấy Tờ Nhân Thân Số</label>
+                                                        <p style="color: red; ">{{ customerInfo.id_card }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Quốc Tịch Thứ Nhất</label>
+                                                        <p style="color: red; ">{{ customerInfo.nationality_1 }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Quốc Tịch Khác Khác (Nếu Có)</label>
+                                                        <p style="color: red; ">{{ customerInfo.nationality_1 }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Dân Tộc</label>
+                                                        <p style="color: red; ">{{ customerInfo.nation }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </mat-tab>
+                                        <mat-tab label="Thông tin Nghề Nghiệp">
+                                            <div class="col-6 ">
+                                                <h3>Thông tin Nghề Nghiệp</h3>
+                                                <div class="form-group ">
+                                                    <label for="exampleInputEmail1 ">Nghề Nghiệp</label>
+                                                    <p style="color: red; ">{{ customerInfo.job }}</p>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="exampleInputEmail1 ">Chức Vụ</label>
+                                                    <p style="color: red; ">{{ customerInfo.position }}</p>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="exampleInputEmail1 ">Nghành Nghề</label>
+                                                    <p style="color: red; ">{{ customerInfo.career }}</p>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="exampleInputEmail1 ">Nhóm Nghề</label>
+                                                    <p style="color: red; ">{{ customerInfo.occupation_group }}</p>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="exampleInputEmail1 ">Tên Cơ Quan Làm Việc</label>
+                                                    <p style="color: red; ">{{ customerInfo.company_name }}</p>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="exampleInputEmail1 ">Lĩnh vực Kinh Doanh</label>
+                                                    <p style="color: red; ">{{ customerInfo.main_business }}</p>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="exampleInputEmail1 ">Công việc cụ thể</label>
+                                                    <p style="color: red; ">{{ customerInfo.specific_work }}</p>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label for="exampleInputEmail1 ">Thu Nhập Cá Nhân Hàng Tháng</label>
+                                                    <p style="color: red; ">{{ customerInfo.monthly_income | currency:"VND"}}</p>
+                                                </div>
+                                            </div>
+                                        </mat-tab>
+                                        <mat-tab label="Địa Chỉ">
+                                            <div class="row">
+                                                <div class="col-6 ">
+                                                    <h4>Địa Chỉ Nơi Ở Hiện Tại</h4>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                                        <p style="color: red; ">{{ customerInfo.curadd_no_street }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                                        <p style="color: red; ">{{ customerInfo.curadd_city }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                                        <p style="color: red; ">{{ customerInfo.curadd_district }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                                        <p style="color: red; ">{{ customerInfo.curadd_wards }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <h4>Địa Chỉ Thường Chú</h4>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                                        <p style="color: red; ">{{ customerInfo.peradd_no_street }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                                        <p style="color: red; ">{{ customerInfo.peradd_city }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                                        <p style="color: red; ">{{ customerInfo.peradd_district }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                                        <p style="color: red; ">{{ customerInfo.peradd_wards }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6 ">
+                                                    <h4>Địa Chỉ Liên Lạc Đặc Biệt</h4>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                                        <p style="color: red; ">{{ customerInfo.conadd_no_street }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                                        <p style="color: red; ">{{ customerInfo.conadd_city }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                                        <p style="color: red; ">{{ customerInfo.conadd_district }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                                        <p style="color: red; ">{{ customerInfo.conadd_wards }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <h4>Địa Chỉ Nơi Làm Việc</h4>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                                        <p style="color: red; ">{{ customerInfo.workadd_no_street }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                                        <p style="color: red; ">{{ customerInfo.workadd_city }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                                        <p style="color: red; ">{{ customerInfo.workadd_district }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                                        <p style="color: red; ">{{ customerInfo.workadd_wards }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </mat-tab>
+                                        <mat-tab label="Thông Tin Liên Lạc">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3>ĐT cố Định và Email</h3>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Email:</label>
+                                                        <p style="color: red; ">{{ customerInfo.email }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Điện Thoại Di Động 1:</label>
+                                                        <p style="color: red; ">{{ customerInfo.workadd_wards }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Điện Thoại Di Động 1:</label>
+                                                        <p style="color: red; ">{{ customerInfo.phone_1 }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Điện Thoại Di Động 2:</label>
+                                                        <p style="color: red; ">{{ customerInfo.phone_2 }}</p>
+                                                    </div>
+                                                </div>                                              
+                                            </div>
+                                        </mat-tab>
+                                    </mat-tab-group>
+                                </div>
+                                <div class="custom-foot">
+                                    <button type="button " style="width: 100%;padding:5px;" class="btn btn-success btn-function" (click)="openDialogEdit()">Chỉnh Sửa Thông
+                                        Tin</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+
+</html>

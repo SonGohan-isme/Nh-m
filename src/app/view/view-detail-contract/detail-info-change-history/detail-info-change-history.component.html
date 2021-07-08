@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-body" style="overflow: auto; height: 700px;">
+        <h3 class="card-title">Chi Tiết Lịch Sử Thay Đổi Thông Tin</h3>
+        <table class=" table table-bordered ">
+            <thead>
+                <tr>
+                    <th>Hạng Mục</th>
+                    <th>Thông Tin Cũ</th>
+                    <th>Thông Tin Mới</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tên chủ hợp đồng</td>
+                    <td>{{oldInfomation.name_contract_owner}}</td>
+                    <td>{{newInfomation.name_contract_owner}}</td>
+                </tr>
+                <tr>
+                    <td>Kỳ Hạn</td>
+                    <td>{{oldInfomation.payment_period_id}}</td>
+                    <td>{{newInfomation.payment_period_id}}</td>
+                </tr>
+                <tr>
+                    <td>Loại Bảo Hiểm</td>
+                    <td>{{oldInfomation.insurance_type}}</td>
+                    <td>{{newInfomation.insurance_type}}</td>
+                </tr>
+                <tr>
+                    <td>Mã Quyền lợi chính</td>
+                    <td>{{oldInfomation.id_main_benifit}}</td>
+                    <td>{{newInfomation.id_main_benifit}}</td>
+                </tr>
+                <tr>
+                    <td>Mã Bảng Minh Họa</td>
+                    <td>{{oldInfomation.id_illustration}}</td>
+                    <td>{{newInfomation.id_illustration}}</td>
+                </tr>
+                <tr>
+                    <td>Tổng Số Tiền Phải Trả</td>
+                    <td>{{oldInfomation.contract_total_value}}</td>
+                    <td>{{newInfomation.contract_total_value}}</td>
+                </tr>
+                <tr>
+                    <td>Ngày Hết Hạn</td>
+                    <td>{{oldInfomation.end_time}}</td>
+                    <td>{{newInfomation.end_time}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

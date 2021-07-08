@@ -1,0 +1,61 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>CHI TIẾT MAIL</h1>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <table class=" table table-bordered ">
+              <thead>
+                  <tr>
+                      <th>Hạng Mục</th>
+                      <th>Nội Dung</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td><b>Tiêu Đề</b></td>
+                      <td>{{ data.title }}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Người Gửi</b></td>
+                    <td>{{ data.name }}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Ngày Gửi</b></td>
+                    <td>{{ data.time | date:'dd/MM/yyyy'}}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Nội Dung</b></td>
+                    <td>{{ data.content }}</td>
+                  </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+
+

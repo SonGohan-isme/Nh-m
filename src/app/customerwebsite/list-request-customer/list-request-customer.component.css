@@ -1,0 +1,42 @@
+.table:not(.table-dark) {
+    color: black;
+}
+a:not([href]):not([tabindex]) {
+    color: rgb(25, 62, 196);
+}
+.form-control {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    padding: 8px 20px;
+    border: 1px solid #d9d9d9;
+}
+
+.navbar{
+    background: white;
+    box-shadow: 0 3px 6px 3px rgb(0 0 0 / 6%);
+}
+
+.card-info{
+    border-radius: 10px;
+    margin: 19px;
+    padding: 10px;
+    box-shadow: 0 3px 6px 3px rgb(0 0 0 / 19%);
+}
+
+.btn-custom{
+    margin-left: 10px;
+}
+
+.title_profile_cust{
+    text-align: center;
+    margin-top: 100px;
+    font-size: 38px;
+    color: #222;
+    font-weight: 700;
+    font-family: titillium web, sans-serif;
+}

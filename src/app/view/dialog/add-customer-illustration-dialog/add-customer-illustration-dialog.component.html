@@ -1,0 +1,32 @@
+<mat-dialog-content class="mat-typography">
+    <div>
+        <div>
+            <div>
+                <form>
+                    <div class="card-body">
+                        <div style="display: inline; ">
+                            <h3>Thêm Chiến Dịch</h3>
+                        </div>
+                        <div class="form-group ">
+                            <label>Tài Khoản Khách Hàng</label>
+                            <input type="email" class="form-control" name="code" placeholder="Code Khách Hàng" [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="codeValue">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày Dự Kiến Kết Thúc Chiến Dịch</label>
+                            <input class="form-control" type="date" name="end_time" [(ngModel)]="end_time" [min]="end_time">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end ">
+    <button mat-button mat-dialog-close>Hủy</button>
+    <button mat-button (click)="onSubmit()" [mat-dialog-close]="true " cdkFocusInitial>Lưu</button>
+</mat-dialog-actions>

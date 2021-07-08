@@ -1,0 +1,375 @@
+<div class="content-wrapper custom-wraper">
+    <div class="col-12">
+        <div class="card">
+
+            <mat-tab-group>
+
+                <mat-tab label="Thông tin cá nhân">
+                    <mat-tab-group>
+                        <mat-tab label="Thông tin Cơ Bản">
+                            <div class="col-12 row">
+                                <div class=" col-6">
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Nguồn</label>
+                                        <p style="color: red; ">{{custInfo[0]?.source}}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputPassword1 ">Ngày Cập Nhật</label>
+                                        <!-- <p style="color: red; padding-bottom: 10px;">{{custInfo.start_time}}</p> -->
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputPassword1 ">Mã Hợp Đồng</label>
+                                        <p style="color: red; ">
+                                            <span><a *ngFor="let item of custInfo" (click)="openDialogContractDetail(item.id_contract)">#HĐ{{ item?.id_contract }}&nbsp;&nbsp;</a></span>
+                                        </p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputPassword1 ">Mã Bản Minh Họa Tương Ứng</label>
+                                        <p style="color: red;">
+                                            <span><a *ngFor="let item of custInfo" (click)="openillustrationDetailDialog(item.id_illustration)">#BMH{{ item?.id_illustration }}&nbsp;&nbsp;</a></span>
+                                        </p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputPassword1 ">Mã Khách Hàng</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.code }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Họ Tên</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.full_name }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Giới Tính</label>
+                                        <p *ngIf="custInfo[0]?.gender" style="color: red; ">Nam</p>
+                                        <p *ngIf="!custInfo[0]?.gender" style="color: red; ">Nữ</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Tình Trạng Hôn Nhân</label>
+                                        <p *ngIf="custInfo[0]?.birth_address" style="color: red; ">Kết Hôn</p>
+                                        <p *ngIf="!custInfo[0]?.birth_address" style="color: red; ">Chưa Kết Hôn</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Ngày Sinh</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.birth_date | date: 'dd-MM-yyyy'}}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Tuổi</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.age }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Nơi Sinh</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.curadd_city }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Loại Giấy Tờ Tùy Thân</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.types_identification }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Giấy Tờ Nhân Thân Số</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.id_card }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Quốc Tịch Thứ Nhất</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.nationality_1 }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Quốc Tịch Khác Khác (Nếu Có)</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.nationality_2 }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Dân Tộc</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.nation }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Thông tin Nghề Nghiệp">
+                            <div class="col-6 ">
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Nghề Nghiệp</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.job }}</p>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Chức Vụ</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.position }}</p>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Nghành Nghề</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.career }}</p>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Nhóm Nghề</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.occupation_group }}</p>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Tên Cơ Quan Làm Việc</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.company_name }}</p>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Lĩnh vực Kinh Doanh</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.main_business }}</p>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Công việc cụ thể</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.specific_work }}</p>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Thu Nhập Cá Nhân Hàng Tháng</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.monthly_income | currency:"VND"}}</p>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Địa Chỉ">
+                            <div class="col-12 row">
+                                <div class="col-6 ">
+                                    <h4>Địa Chỉ Nơi Ở Hiện Tại</h4>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.curadd_no_street }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.curadd_city }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.curadd_district }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.curadd_wards }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 ">
+                                    <h4>Địa Chỉ Thường Chú</h4>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.peradd_no_street }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.peradd_city }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.peradd_district }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.peradd_wards }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 row">
+                                <div class="col-6 ">
+                                    <h4>Địa Chỉ Liên Lạc Đặc Biệt</h4>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.conadd_no_street }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.conadd_city }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.conadd_district }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.conadd_wards }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 ">
+                                    <h4>Địa Chỉ Nơi Làm Việc</h4>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.workadd_no_street }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.workadd_city }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.workadd_district }}</p>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                        <p style="color: red; ">{{ custInfo[0]?.workadd_wards }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Thông Tin Liên Lạc">
+
+                            <div class="col-6">
+                                <h3>ĐT cố Định và Email</h3>
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Email:</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.email }}</p>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Điện Thoại Di Động 1:</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.phone_1 }}</p>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="exampleInputEmail1 ">Điện Thoại Di Động 2:</label>
+                                    <p style="color: red; ">{{ custInfo[0]?.phone_2 }}</p>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-tab>
+                <mat-tab label="Bảng minh họa">
+                    <div class="col-12">
+                        <div class="card-header">
+                            <h2><b>Thông Tin Bên Mua Bảo Hiểm</b></h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Họ Và Tên</th>
+                                <td>{{illustration?.illustrationMainBenifit.full_name_insurance_buyer}}</td>
+                            </tr>
+                            <tr>
+                                <th>Mối Quan Hệ Với NĐBH Sản Phẩm Chính</th>
+                                <td>{{illustration?.illustrationMainBenifit.insurance_buyer_relation_insured_person}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card-header">
+                            <h2><b>Người Được Bảo Hiểm Của Hợp Đồng Chính</b></h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Họ Và Tên</th>
+                                <td>{{illustration?.illustrationMainBenifit.full_name_insured_person}}</td>
+                            </tr>
+                            <tr>
+                                <th>Nhóm Nghề</th>
+                                <td>{{illustration?.illustrationMainBenifit.carrier_group_insured_person}}</td>
+                            </tr>
+                            <tr>
+                                <th>Ngày Sinh</th>
+                                <td>{{illustration?.illustrationMainBenifit.birth_date_insured_person | date: 'dd-MM-yyyy'}}</td>
+                            </tr>
+                            <tr>
+                                <th>Giới Tính</th>
+                                <td>
+                                    <span *ngIf="illustration?.illustrationMainBenifit.gender_insured_person">Nam</span>
+                                    <span *ngIf="!illustration?.illustrationMainBenifit.gender_insured_person">Nữ</span>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card-header">
+                            <h2><b>Thông Tin Hợp Đồng Chính</b></h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Chương Trình</th>
+                                <td>{{illustration?.benifit_name}}</td>
+                            </tr>
+                            <tr>
+                                <th>Thời Hạn</th>
+                                <td *ngIf="illustration?.payment_period_id==4">Tháng</td>
+                                <td *ngIf="illustration?.payment_period_id==3">Quý</td>
+                                <td *ngIf="illustration?.payment_period_id==2">Nửa năm</td>
+                                <td *ngIf="illustration?.payment_period_id==1">Năm</td>
+                            </tr>
+                            <tr>
+                                <th>Số Tiền Bảo Hiểm (VNĐ)</th>
+                                <td>{{illustration?.illustrationMainBenifit.denominations | currency : "VND"}}</td>
+                            </tr>
+                            <tr>
+                                <th>Phí Bảo Hiểm (VNĐ)</th>
+                                <td>{{illustration?.illustrationMainBenifit.fee_value | currency : "VND"}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-12" *ngFor="let RelatedPerSonInfo of listRelatedPerSonInfo">
+                        <div class="card-header">
+                            <h2><b>Bảo Hiểm Bổ Sung của {{RelatedPerSonInfo.full_name_insured_persion_extra}}</b></h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Họ Và Tên</th>
+                                <td>{{RelatedPerSonInfo?.full_name_insured_persion_extra}}</td>
+                            </tr>
+                            <tr>
+                                <th>Mối Quan hệ với NĐBH sản phẩm chính</th>
+                                <td>{{RelatedPerSonInfo?.insurance_buyer_relation_extra_insured_person}}</td>
+                            </tr>
+                            <tr>
+                                <th>Ngày Sinh</th>
+                                <td>{{RelatedPerSonInfo?.dob_extra_insured_person | date: 'dd-MM-yyyy'}}</td>
+                            </tr>
+                            <tr>
+                                <th>Giới Tính</th>
+                                <td>
+                                    <span *ngIf="RelatedPerSonInfo?.gender_extra_insured_person">Nam</span>
+                                    <span *ngIf="!RelatedPerSonInfo?.gender_extra_insured_person">Nữ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Nhóm Nghề</th>
+                                <td>{{RelatedPerSonInfo?.carrier_group_extra_insured_person}}</td>
+                            </tr>
+                        </table>
+
+
+                        <div class="card-header">
+                            <h2>
+                                <b>Thông Tin Quyền Lợi Bảo Hiểm Bổ Sung </b>
+                            </h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Tên Quyền Lợi</th>
+                                <th>Nhóm Nghề Nghiệp</th>
+                                <th>Số Tiền Bảo Hiểm</th>
+                                <th>Phí Bảo Hiểm</th>
+                            </tr>
+                            <tr *ngFor="let detail of RelatedPerSonInfo.listSubInterset">
+                                <td>{{listSubBenifit[detail?.id_sub_benifit-1].benifit_name}}</td>
+                                <td>{{detail?.carrier_group_extra_insured_person}}</td>
+                                <td>{{detail?.denominations | currency : "VND"}}</td>
+                                <td>{{detail?.fee_value | currency : "VND"}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card-header">
+                            <h2><b>Tổng Phí Bảo Hiểm</b></h2>
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>{{illustration?.total_fee | currency : "VND"}}</th>
+                            </tr>
+                        </table>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Giấy Tờ Liên Quan">
+                    <div>
+                        <p class="form-control-custom" *ngFor="let doc of listDocument"><a href="{{doc.url}}">{{doc.name_document}}</a></p>
+                    </div>
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+    </div>
+</div>
+<div class="custom-div">
+    <button *ngIf="req?.status=='CXD'" class="btn btn-success custom-bnt" (click)="displayConfirmDialog()">XÉT DUYỆT</button>
+</div>

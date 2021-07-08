@@ -1,0 +1,27 @@
+.section-padding-cust {
+    padding: 60px 0;
+}
+
+.bg-gray-cust {
+    background: #f9f9f9;
+}
+
+.khcn {
+    font-size: 38px;
+    color: #222;
+    font-weight: 700;
+    font-family: titillium web, sans-serif;
+}
+
+.background-image {
+    background: url(https://genvita.vn/-/media/genvita/articles/desktops/img67461565.ashx?w=1920&h=1080&useCustomFunctions=1&centerCrop=1&hash=1941E1204A9BEBC8F4AAB1CCD5089912F9551A32) no-repeat;
+    background-size: cover;
+}
+
+.list-Insurance {
+    background-color: rgb(0, 0, 0, 0.6)
+}
+
+.feature-content p {
+    color: white;
+}

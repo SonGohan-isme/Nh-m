@@ -1,0 +1,49 @@
+<div class="searchWithDateandValue">
+    <div class="left">
+    </div>
+    <div class="right">
+        <div class="input-group searchBar">
+            <input type="search" class="form-control form-control-lg" [(ngModel)]="searchValue" placeholder="Nhập từ khóa cần tìm">
+        </div>
+        <div class="date">
+            <label>Từ Ngày<input id="RfromSearch" type="date" name="dateFrom" [(ngModel)]="dateFrom"
+                    class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+            <label style="margin-left: 2%;"> Đến Ngày<input id="RtoSearch" type="date" name="dateTo" [(ngModel)]="dateTo"
+                    class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+            <button type="button" class="btn btn-danger btn-date" (click)="ResetDate()">Xóa
+                ngày</button>
+            <button type="button" class="btn btn-info btn-date" (click)="Search()">Tìm kiếm
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<table id="illustration-table" *ngIf="listCustomerOwnIllustration" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th (click)="sort('id_customer')"> Mã Khách Hàng&nbsp;<i class="fas fa-sort"></i></th>
+            <th (click)="sort('code')">Tài Khoản Khách Hàng&nbsp;<i class="fas fa-sort"></i></th>
+            <th (click)="sort('full_name')">Tên Khách Hàng&nbsp;<i class="fas fa-sort"></i></th>
+            <th (click)="sort('create_time')">Ngày Tạo&nbsp;<i class="fas fa-sort"></i></th>
+            <th (click)="sort('end_time')">Ngày Dự Kiến Kết Thúc Chiến Dịch&nbsp;<i class="fas fa-sort"></i></th>
+            <th>Danh Sách Bản Minh Hoạ</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let customerOwnIllustration of listCustomerOwnIllustration | orderBy: key:reverse | paginate: { id: 'listing_pagination' ,itemsPerPage: 8, currentPage: page, totalItems: totalRecords} ">
+        <tr>
+            <td>
+                <b></b>
+                <a *ngIf="customerOwnIllustration.id_customer" (click)="openDialogCustomerDetail(customerOwnIllustration.id_customer)">#KH{{customerOwnIllustration.id_customer}}</a>
+            </td>
+            <td>{{ customerOwnIllustration.code }}</td>
+            <td>{{ customerOwnIllustration.full_name }}</td>
+            <td>{{ customerOwnIllustration.create_time | date : 'dd-MM-yyyy' }}</td>
+            <td>{{ customerOwnIllustration.end_time | date : 'dd-MM-yyyy' }}</td>
+            <td>
+                <button (click)="listIllustration(customerOwnIllustration.id_customer)" class="btn btn-info" style="width: 100%;color: white;">Chi Tiết</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<pagination-controls style="float: right;" id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>

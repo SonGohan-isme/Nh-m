@@ -1,0 +1,75 @@
+<mat-dialog-content class="mat-typography">
+    <div class="card-header">
+        <h2><b>Form Xét Duyệt</b></h2>
+    </div>
+    <div class="row flex">
+        <div class="col-12 col-md-6 col-lg-6">
+            <table id="table1">
+                <tbody>
+                    <th class="td1">Loại chính</th>
+                    <tr *ngFor="let mainBenefitScale of listMainBenefitScale">
+                        <td>{{mainBenefitScale.name}}</td>
+                        <td id="tienChinh">{{mainBenefitScale.scale * mainBenefit.denominations}}</td>
+                        <td>
+                            <input type="radio" name="chinh"
+                                (change)="handleChange1(mainBenefitScale.scale * mainBenefit.denominations)">
+                        </td>
+                    </tr>
+                    <th class="td1">Loại phụ</th>
+                    <tr *ngFor=" let subBenefitScale of listSubBenefitScale">
+                        <td>{{subBenefitScale.name}}</td>
+                        <td>{{subBenefitScale.scale * listSub[0].denominations}}</td>
+                        <td>
+                            <input type="radio" name="phu" id="phu"
+                                (change)="handleChange2(subBenefitScale.scale * listSub[0].denominations)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6">
+            <form #reviewForm="ngForm">
+                <table class="table">
+
+                    <tr>
+                        <th>Quyết Định Xét Duyệt</th>
+                        <td>
+                            <select class="custom-select" [(ngModel)]="approveStatus" name="approveStatus" required>
+                                <option value="DX">Đề Xuất</option>
+                                <option value="YCT">Yêu Cầu Bổ Sung</option>
+                                <option value="TC">Từ Chối</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Số tiền chi trả</th>
+                        <td class="td-table2"><input class="form-control" type="number" placeholder="VND"
+                                [(ngModel)]="amountMoney" name="amountMoney"></td>
+                    </tr>
+                    <tr>
+                        <th>Độ Ưu Tiên</th>
+                        <div class="form-group">
+                            <select class="form-control1" name="priority" [(ngModel)]="priority" required>
+                                <option value="Cao">Cao</option>
+                                <option value="Thấp">Thấp</option>
+                            </select>
+                        </div>
+                    </tr>
+                    <tr>
+                        <th>Ghi Chú</th>
+                        <td class="td-table2"><textarea class="form-control" rows="3" maxlength="2000"
+                                placeholder="Enter ..." name="description" [(ngModel)]="description" #note="ngModel"
+                                required>
+                        <span id="errorMessagename" style="color: red;" *ngIf="note.errors?.required && note.touched">Ghi Chú không được để trống</span>
+                    </textarea>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Hủy</button>
+    <button mat-button mat-dialog-close [disabled]="reviewForm.invalid" type="submit" (click)="Review()">Lưu</button>
+</mat-dialog-actions>

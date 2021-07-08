@@ -1,0 +1,13 @@
+.income {
+    padding: 2%;
+    margin: 2%;
+    background: white;
+    box-shadow: 0 3px 6px 3px rgb(0 0 0 / 6%);
+    border-radius: 9px;
+}
+
+.merge-row {
+    text-align: center;
+    vertical-align: inherit;
+    width: 20%;
+}

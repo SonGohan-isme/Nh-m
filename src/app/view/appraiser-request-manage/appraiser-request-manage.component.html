@@ -1,0 +1,142 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <h2><b>Danh Sách Yêu Cầu Xét Duyệt BH</b></h2>
+                            <div class="searchWithDateandValue">
+                                <div class="left">
+                                </div>
+                                <div class="right">
+                                    <div class="input-group searchBar">
+                                        <input type="search" class="form-control form-control-lg" [(ngModel)]="searchValueRequest" placeholder="Nhập từ khóa cần tìm">
+                                    </div>
+                                    <div class="date">
+                                        <label>Từ Ngày<input id="RfromSearchRequest" type="date" name="dateFromRequest" [(ngModel)]="dateFromRequest"
+                                                class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+                                        <label style="margin-left: 2%;"> Đến Ngày<input id="RtoSearchRequest" type="date" name="dateToRequest" [(ngModel)]="dateToRequest"
+                                                class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+                                        <button type="button" class="btn btn-danger btn-date" (click)="ResetDateRequest()">Xóa
+                                            ngày</button>
+                                        <button type="button" class="btn btn-info btn-date" (click)="SearchRequest()">Tìm kiếm
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <table class="table table-bordered table-striped" style="text-align: center;">
+                                <thead>
+                                    <tr>
+                                        <th (click)="sort('id_contract')">Mã Hợp Đồng&nbsp;<i class="fas fa-sort"></i></th>
+                                        <th (click)="sort('name')">Tên Yêu Cầu&nbsp;<i class="fas fa-sort"></i></th>
+                                        <th (click)="sort('priority')">Độ Ưu Tiên&nbsp;<i class="fas fa-sort"></i></th>
+                                        <th (click)="sort('date')">Ngày Gửi&nbsp;<i class="fas fa-sort"></i></th>
+                                        <th (click)="sort('code_sender')">Người Gửi&nbsp;<i class="fas fa-sort"></i></th>
+                                        <th>Chi Tiết</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let contractRequest of contractRequests | orderBy: key:reverse | paginate: { id: 'listing_pagination_request' ,itemsPerPage: 8, currentPage: pageRequest, totalItems: totalRecordsRequest}">
+                                        <td><a style="color: rgb(19, 149, 255); cursor: pointer;" (click)="openDialogContractDetail(contractRequest.id_contract,contractRequest.code_sender)">#HD{{contractRequest.id_contract}}</a></td>
+                                        <td>{{contractRequest.name}}</td>
+                                        <td>{{contractRequest.priority}}</td>
+                                        <td>{{contractRequest.date | date: 'dd-MM-yyyy'}}</td>
+                                        <td>{{contractRequest.code_sender}}</td>
+                                        <td><button (click)="requestDetail(contractRequest.id)" class="btn btn-info" style="height: 100%; width: 100%; color: white;">Chi Tiết</button></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Mã Hợp Đồng</th>
+                                        <th>Tên Yêu Cầu</th>
+                                        <th>Độ Ưu Tiên</th>
+                                        <th>Ngày Gửi</th>
+                                        <th>Người Gửi</th>
+                                        <th>Chi Tiết</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <pagination-controls style="float: right;" id="listing_pagination_request" maxSize="5" directionLinks="true" (pageChange)="pageRequest = $event"></pagination-controls>
+                        </div>
+
+                        <div class="card-body">
+                            <h2><b>Danh Sách Lịch Sử Yêu Cầu Xét Duyệt BH</b></h2>
+                            <div class="searchWithDateandValue">
+                                <div class="left">
+                                </div>
+                                <div class="right">
+                                    <div class="input-group searchBar">
+                                        <input type="search" class="form-control form-control-lg" [(ngModel)]="searchValueApproval" placeholder="Nhập từ khóa cần tìm">
+                                    </div>
+                                    <div class="date">
+                                        <label>Từ Ngày<input id="RfromSearchApproval" type="date" name="dateFromApproval" [(ngModel)]="dateFromApproval"
+                                                class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+                                        <label style="margin-left: 2%;"> Đến Ngày<input id="RtoSearchApproval" type="date" name="dateToApproval" [(ngModel)]="dateToApproval"
+                                                class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+                                        <button type="button" class="btn btn-danger btn-date" (click)="ResetDateApproval()">Xóa
+                                            ngày</button>
+                                        <button type="button" class="btn btn-info btn-date" (click)="SearchApproval()">Tìm kiếm
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <table class="table table-bordered table-striped" style="text-align: center;">
+                                <thead>
+                                    <tr>
+                                        <th (click)="sort('contractRequestsApproval.id_contract')">Mã Hợp Đồng&nbsp;<i class="fas fa-sort"></i></th>
+                                        <th (click)="sort('contractRequestsApproval.description')">Ghi chú</th>
+                                        <th (click)="sort('contractRequestsApproval.date')">Ngày Gửi&nbsp;<i class="fas fa-sort"></i></th>
+                                        <th (click)="sort('contractRequestsApproval.code_sender')">Người Gửi&nbsp;<i class="fas fa-sort"></i></th>
+                                        <th (click)="sort('contractRequestsApproval.status')">Trạng Thái&nbsp;<i class="fas fa-sort"></i></th>
+                                        <th>Chi Tiết</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let contractRequestsApproval of contractRequestsApprovals | orderBy: key:reverse | paginate: { id: 'listing_pagination_approved' ,itemsPerPage: 8, currentPage: pageApprovals, totalItems: totalRecordsApprovals}">
+                                        <td><a style="color: rgb(19, 149, 255);cursor: pointer;" (click)="openDialogContractDetail(contractRequestsApproval.id_contract,contractRequestsApproval.code_sender)">#HD{{contractRequestsApproval.id_contract}}</a></td>
+                                        <td>
+                                            <p class="description">{{contractRequestsApproval.description}}</p>
+                                        </td>
+                                        <td>{{contractRequestsApproval.date | date:'dd-MM-yyyy'}}</td>
+                                        <td>{{contractRequestsApproval.code_sender}}</td>
+                                        <td>{{contractRequestsApproval.status}}</td>
+                                        <td><button (click)="requestDetail(contractRequestsApproval.id)" class="btn btn-info" style="height: 40px; width: 100px; margin: 10px; color: white;">Chi Tiết</button></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Mã Hợp Đồng</th>
+                                        <th>Ghi chú</th>
+                                        <th>Ngày Gửi</th>
+                                        <th>Người Gửi</th>
+                                        <th>Trạng Thái</th>
+                                        <th>Chi Tiết</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <pagination-controls style="float: right;" id="listing_pagination_approved" maxSize="5" directionLinks="true" (pageChange)="pageApprovals = $event"></pagination-controls>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

@@ -1,0 +1,414 @@
+<mat-dialog-content class="mat-typography">
+    <div style="overflow: hidden;">
+        <mat-tab-group>
+            <form #userInfo="ngForm">
+                <mat-tab label="Thông tin Cơ Bản">
+                    <div class="row">
+                        <div class=" col-6 ">
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Nguồn</label>
+                                <input type="text" class="form-control" name="Source" [(ngModel)]="customerInfo.source">
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputPassword1 ">Ngày Cập Nhật Cuối Cùng</label>
+                                <!-- <p style="color: black; ">20/11/2021</p> -->
+                                <input type="date" class="form-control" name="DateUpdated" [ngModel]="customerInfo.updated_time | date:'yyyy-MM-dd'" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputPassword1 ">Mã Hợp Đồng</label>
+                                <!-- <p style="color: black; "><a href="# ">#128462364</a></p> -->
+                                <input type="text" class="form-control" name="id_contract" [(ngModel)]="customerInfo.id_contract" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputPassword1 " readonly>Mã Bản Minh Họa</label>
+                                <!-- <p style="color: black; "><a href="# ">#128462364</a></p> -->
+                                <input type="text" class="form-control" name="id_illustration" [(ngModel)]="customerInfo.id_illustration" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputPassword1 ">Mã Khách Hàng</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.code }}</p> -->
+                                <input type="text" class="form-control" name="id" [(ngModel)]="customerInfo.id" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Họ Tên</label>
+                                <input type="text" class="form-control" name="full_name" [(ngModel)]="customerInfo.full_name" required pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềếểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$"
+                                    #name="ngModel">
+                                <span id="errorMessagename" style="color: red;" *ngIf="name.errors?.required && name.touched">Họ và tên không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="name.errors?.pattern && name.touched">Họ và tên không được để kí tự đặc biệt
+                                    hoặc
+                                    chữ số</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Giới Tính</label>
+                                <select [(ngModel)]="customerInfo.gender" class="form-control" name="gender">
+                                    <option *ngFor="let gender of genders" [value]="gender.value">{{gender.viewValue}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Tình Trạng Hôn Nhân</label>
+                                <select [(ngModel)]="customerInfo.marital_status" class="form-control" name="marital_status">
+                                    <option *ngFor="let marital_status of marital_statuss"
+                                        [value]="marital_status.value">{{marital_status.viewValue}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Ngày Sinh</label>
+                                <input type="date" class="form-control" name="birth_date" [ngModel]="customerInfo.birth_date | date:'yyyy-MM-dd' " (ngModelChange)="caculateAge($event)" max="2020-01-01" required>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Tuổi</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.age }}</p> -->
+                                <input type="number" class="form-control" name="age" [(ngModel)]="customerInfo.age" #ageCustomer="ngModel" readonly pattern="[^0]+">
+                                <span id="errorMessagename" style="color: red;" *ngIf="ageCustomer.errors?.pattern">Vui
+                                    lòng chọn ngày sinh
+                                </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Nơi Sinh</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.curadd_city }}</p> -->
+                                <input type="text" class="form-control" name="curadd_city" required pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s0-9\/-]+$" [(ngModel)]="customerInfo.birth_address"
+                                    #curadd_city="ngModel">
+                                <span id="errorMessagename" style="color: red;" *ngIf="curadd_city.errors?.required && curadd_city.touched">Nơi Sinh không được để
+                                    trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="curadd_city.errors?.pattern && curadd_city.touched">Nơi Sinh không được để kí
+                                    tự đặc biệt
+                                </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Loại Giấy Tờ Tùy Thân</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.types_identification }}</p> -->
+                                <select class="form-control" name="types_identification" [(ngModel)]="customerInfo.types_identification" required>
+                                    <option value="Chứng Minh Thư">Chứng Minh Thư</option>
+                                    <option value="Căn Cước Công Dân">Căn Cước Công Dân</option>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Giấy Tờ Nhân Thân Số</label>
+                                <input type="text" class="form-control" name="id_card" [(ngModel)]="customerInfo.id_card" required pattern="(^[0-9]{12}$|^[0-9]{9}$)" #id_card="ngModel">
+                                <span id="errorMessagename" style="color: red;" *ngIf="id_card.errors?.required && id_card.touched">Chứng minh nhân dân không được
+                                    để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="id_card.errors?.pattern && id_card.touched">Chứng minh nhân dân phải đủ 9 số
+                                    hoặc 12 số và không được có chữ cái và kí tự đặc biệt</span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Quốc Tịch Thứ Nhất</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.nationality_1 }}</p> -->
+                                <input type="text" class="form-control" name="nationality_1" required #national1="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+$"
+                                    [(ngModel)]="customerInfo.nationality_1">
+
+                                <span id="errorMessagename" style="color: red;" *ngIf="national1.errors?.required && national1.touched">Quốc Tịch Thứ Nhất không
+                                    được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="national1.errors?.pattern && national1.touched">Quốc Tịch Thứ Nhất không được
+                                    chứa kí tự đặc biệt và chữ số</span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Quốc Tịch Khác Khác (Nếu Có)</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.nationality_1 }}</p> -->
+                                <input type="text" class="form-control" name="nationality_2" #national2="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+$" [(ngModel)]="customerInfo.nationality_2">
+                                <span id="errorMessagename" style="color: red;" *ngIf="national2.errors?.pattern && national2.touched">Dân Tộc không được chứa kí tự đặc biệt và chữ số</span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Dân Tộc</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.nation }}</p> -->
+                                <input type="text" class="form-control" name="nation" required #national="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+$" [(ngModel)]="customerInfo.nation">
+                                <span id="errorMessagename" style="color: red;" *ngIf="national.errors?.required && national.touched">Dân Tộc không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="national.errors?.pattern && national.touched">Dân Tộc không được chứa kí tự đặc biệt và chữ số</span>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Thông tin Nghề Nghiệp">
+                    <div class="col-6 ">
+
+                        <div class="form-group ">
+                            <label for="exampleInputEmail1 ">Nghề Nghiệp</label>
+                            <!-- <p style="color: black; ">{{ customerInfo.job }}</p> -->
+                            <input type="text" class="form-control" name="job" required #job="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+$" [(ngModel)]="customerInfo.job">
+                            <span id="errorMessagename" style="color: red;" *ngIf="job.errors?.required && job.touched">Nghề Nghiệp không được để trống</span>
+                            <span id="errorMessagename" style="color: red;" *ngIf="job.errors?.pattern && job.touched">Nghề Nghiệp không được chứa kí tự đặc biệt và chữ số</span>
+                        </div>
+                        <div class="form-group ">
+                            <label for="exampleInputEmail1 ">Chức Vụ</label>
+                            <!-- <p style="color: black; ">{{ customerInfo.position }}</p> -->
+                            <input type="text" class="form-control" name="position" required #position="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+$" [(ngModel)]="customerInfo.position">
+                            <span id="errorMessagename" style="color: red;" *ngIf="position.errors?.required && position.touched">Chức Vụ không được để trống</span>
+                            <span id="errorMessagename" style="color: red;" *ngIf="position.errors?.pattern && position.touched">Chức Vụ không được chứa kí tự đặc biệt và chữ số</span>
+                        </div>
+                        <div class="form-group ">
+                            <label for="exampleInputEmail1 ">Nghành Nghề</label>
+                            <!-- <p style="color: black; ">{{ customerInfo.career }}</p> -->
+                            <input type="text" class="form-control" name="career" required #career="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+$" [(ngModel)]="customerInfo.career">
+                            <span id="errorMessagename" style="color: red;" *ngIf="career.errors?.required && career.touched">Nghành Nghề không được để trống</span>
+                            <span id="errorMessagename" style="color: red;" *ngIf="career.errors?.pattern && career.touched">Nghành Nghề không được chứa kí tự đặc biệt và chữ số</span>
+                        </div>
+                        <div class="form-group ">
+                            <label for="exampleInputEmail1 ">Nhóm Nghề</label>
+                            <td>
+                                <select [(ngModel)]="customerInfo.occupation_group" name="occupation_group" class="form-control">
+                                    <option *ngFor="let occupation_group of occupation_groups"
+                                        [value]="occupation_group.value">{{occupation_group.viewValue}}</option>
+                                </select>
+                            </td>
+                        </div>
+                        <div class="form-group ">
+                            <label for="exampleInputEmail1 ">Tên Cơ Quan Làm Việc</label>
+                            <!-- <p style="color: black; ">{{ customerInfo.company_name }}</p> -->
+                            <input type="text" class="form-control" name="company_name" required #company_name="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+$"
+                                [(ngModel)]="customerInfo.company_name">
+                            <span id="errorMessagename" style="color: red;" *ngIf="company_name.errors?.required && company_name.touched">Tên Cơ Quan Làm Việc không
+                                được để trống</span>
+                            <span id="errorMessagename" style="color: red;" *ngIf="company_name.errors?.pattern && company_name.touched">Tên Cơ Quan Làm Việc không
+                                được chứa kí tự đặc biệt </span>
+                        </div>
+                        <div class="form-group ">
+                            <label for="exampleInputEmail1 ">Lĩnh vực Kinh Doanh</label>
+                            <!-- <p style="color: black; ">{{ customerInfo.main_business }}</p> -->
+                            <input type="text" class="form-control" name="main_business" required #main_business="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+$"
+                                [(ngModel)]="customerInfo.main_business">
+                            <span id="errorMessagename" style="color: red;" *ngIf="main_business.errors?.required && main_business.touched">Lĩnh vực Kinh Doanh
+                                không được để trống</span>
+                            <span id="errorMessagename" style="color: red;" *ngIf="main_business.errors?.pattern && main_business.touched">Lĩnh vực Kinh Doanh không
+                                được chứa kí tự đặc biệt và chữ số</span>
+                        </div>
+                        <div class="form-group ">
+                            <label for="exampleInputEmail1 ">Công việc cụ thể</label>
+                            <!-- <p style="color: black; ">{{ customerInfo.specific_work }}</p> -->
+                            <input type="text" class="form-control" name="specific_work" required #specific_work="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+$"
+                                [(ngModel)]="customerInfo.specific_work">
+                            <span id="errorMessagename" style="color: red;" *ngIf="specific_work.errors?.required && specific_work.touched">Công việc cụ thể không
+                                được để trống</span>
+                            <span id="errorMessagename" style="color: red;" *ngIf="specific_work.errors?.pattern && specific_work.touched">Công việc cụ thể không
+                                được chứa kí tự đặc biệt và chữ số</span>
+                        </div>
+                        <div class="form-group ">
+                            <label for="exampleInputEmail1 ">Thu Nhập Cá Nhân Hàng Tháng</label>
+                            <!-- <p style="color: black; ">{{ customerInfo.monthly_income }}\</p> -->
+                            <input type="number" class="form-control" min="0" name="monthly_income" required #monthly_income="ngModel" pattern="[0-9]+" [(ngModel)]="customerInfo.monthly_income">
+                            <span id="errorMessagename" style="color: red;" *ngIf="monthly_income.errors?.required && monthly_income.touched">Thu Nhập Cá Nhân Hàng
+                                Tháng không được để trống</span>
+                            <span id="errorMessagename" style="color: red;" *ngIf="monthly_income.errors?.pattern && monthly_income.touched">Thu Nhập Cá Nhân Hàng
+                                Tháng không được chứa kí tự đặc biệt và chữ số</span>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Địa Chỉ">
+                    <div class="row">
+                        <div class="col-6 ">
+                            <h4>Địa Chỉ Nơi Ở Hiện Tại</h4>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.curadd_no_street }}</p> -->
+                                <input type="text" class="form-control" name="curadd_no_street" required #curadd_no_street="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.curadd_no_street">
+                                <span id="errorMessagename" style="color: red;" *ngIf="curadd_no_street.errors?.required && curadd_no_street.touched">Số Nhà và Tên
+                                    Đường không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="curadd_no_street.errors?.pattern && curadd_no_street.touched">Số Nhà và Tên
+                                    Đường không được chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.curadd_city }}</p> -->
+                                <input type="text" class="form-control" name="curadd_city" required #curadd_city="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.curadd_city">
+                                <span id="errorMessagename" style="color: red;" *ngIf="curadd_city.errors?.required && curadd_city.touched">Thành Phố/Tỉnh không
+                                    được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="curadd_city.errors?.pattern && curadd_city.touched">Thành Phố/Tỉnh không được
+                                    chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.curadd_district }}</p> -->
+                                <input type="text" class="form-control" name="curadd_district" required #curadd_district="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.curadd_district">
+                                <span id="errorMessagename" style="color: red;" *ngIf="curadd_district.errors?.required && curadd_district.touched">Quận/Huyện không
+                                    được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="curadd_district.errors?.pattern && curadd_district.touched">Quận/Huyện không
+                                    được chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.curadd_wards }}</p> -->
+                                <input type="text" class="form-control" name="curadd_wards" required #curadd_wards="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.curadd_wards">
+                                <span id="errorMessagename" style="color: red;" *ngIf="curadd_wards.errors?.required && curadd_wards.touched">Phường/Xã/Thị Trấn
+                                    không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="curadd_wards.errors?.pattern && curadd_wards.touched">Phường/Xã/Thị Trấn
+                                    không được chứa kí tự đặc biệt </span>
+                            </div>
+                        </div>
+                        <div class="col-6 ">
+                            <h4>Địa Chỉ Thường Chú</h4>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.peradd_no_street }}</p> -->
+                                <input type="text" class="form-control" name="peradd_no_street" required #peradd_no_street="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.peradd_no_street">
+                                <span id="errorMessagename" style="color: red;" *ngIf="peradd_no_street.errors?.required && peradd_no_street.touched">Số Nhà và Tên
+                                    Đường không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="peradd_no_street.errors?.pattern && peradd_no_street.touched">Số Nhà và Tên
+                                    Đường không được chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.peradd_city }}</p> -->
+                                <input type="text" class="form-control" name="peradd_city" required #peradd_city="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.peradd_city">
+                                <span id="errorMessagename" style="color: red;" *ngIf="peradd_city.errors?.required && peradd_city.touched">Thành Phố/Tỉnh không
+                                    được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="peradd_city.errors?.pattern && peradd_city.touched">Thành Phố/Tỉnh không được
+                                    chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.peradd_district }}</p> -->
+                                <input type="text" class="form-control" name="peradd_district" required #peradd_district="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.peradd_district">
+                                <span id="errorMessagename" style="color: red;" *ngIf="peradd_district.errors?.required && peradd_district.touched">Quận/Huyện không
+                                    được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="peradd_district.errors?.pattern && peradd_district.touched">Quận/Huyện không
+                                    được chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.peradd_wards }}</p> -->
+                                <input type="text" class="form-control" name="peradd_wards" required #peradd_wards="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.peradd_wards">
+                                <span id="errorMessagename" style="color: red;" *ngIf="peradd_wards.errors?.required && peradd_wards.touched">Phường/Xã/Thị Trấn
+                                    không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="peradd_wards.errors?.pattern && peradd_wards.touched">Phường/Xã/Thị Trấn
+                                    không được chứa kí tự đặc biệt </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 ">
+                            <h4>Địa Chỉ Liên Lạc Đặc Biệt</h4>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.conadd_no_street }}</p> -->
+                                <input type="text" class="form-control" name="conadd_no_street" required #conadd_no_street="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.conadd_no_street">
+                                <span id="errorMessagename" style="color: red;" *ngIf="conadd_no_street.errors?.required && conadd_no_street.touched">Số Nhà và Tên
+                                    Đường không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="conadd_no_street.errors?.pattern && conadd_no_street.touched">Số Nhà và Tên
+                                    Đường không được chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.conadd_city }}</p> -->
+                                <input type="text" class="form-control" name="conadd_city" required #conadd_city="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.conadd_city">
+                                <span id="errorMessagename" style="color: red;" *ngIf="conadd_city.errors?.required && conadd_city.touched">Thành Phố/Tỉnh không
+                                    được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="conadd_city.errors?.pattern && conadd_city.touched">Thành Phố/Tỉnh không được
+                                    chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.conadd_district }}</p> -->
+                                <input type="text" class="form-control" name="conadd_district" required #conadd_district="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.conadd_district">
+                                <span id="errorMessagename" style="color: red;" *ngIf="conadd_district.errors?.required && conadd_district.touched">Quận/Huyện không
+                                    được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="conadd_district.errors?.pattern && conadd_district.touched">Quận/Huyện không
+                                    được chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.conadd_wards }}</p> -->
+                                <input type="text" class="form-control" name="conadd_wards" required #conadd_wards="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.conadd_wards">
+                                <span id="errorMessagename" style="color: red;" *ngIf="conadd_wards.errors?.required && conadd_wards.touched">Phường/Xã/Thị Trấn
+                                    không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="conadd_wards.errors?.pattern && conadd_wards.touched">Phường/Xã/Thị Trấn
+                                    không được chứa kí tự đặc biệt </span>
+                            </div>
+                        </div>
+                        <div class="col-6 ">
+                            <h4>Địa Chỉ Nơi Làm Việc</h4>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.workadd_no_street }}</p> -->
+                                <input type="text" class="form-control" name="workadd_no_street" required #workadd_no_street="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.workadd_no_street">
+                                <span id="errorMessagename" style="color: red;" *ngIf="workadd_no_street.errors?.required && workadd_no_street.touched">Số Nhà và
+                                    Tên Đường không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="workadd_no_street.errors?.pattern && workadd_no_street.touched">Số Nhà và Tên
+                                    Đường không được chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.workadd_city }}</p> -->
+                                <input type="text" class="form-control" name="workadd_city" required #workadd_city="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.workadd_city">
+                                <span id="errorMessagename" style="color: red;" *ngIf="workadd_city.errors?.required && workadd_city.touched">Thành Phố/Tỉnh không
+                                    được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="workadd_city.errors?.pattern && workadd_city.touched">Thành Phố/Tỉnh không
+                                    được chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.workadd_district }}</p> -->
+                                <input type="text" class="form-control" name="workadd_district" required #workadd_district="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.workadd_district">
+                                <span id="errorMessagename" style="color: red;" *ngIf="workadd_district.errors?.required && workadd_district.touched">Quận/Huyện
+                                    không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="workadd_district.errors?.pattern && workadd_district.touched">Quận/Huyện
+                                    không được chứa kí tự đặc biệt </span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.workadd_wards }}</p> -->
+                                <input type="text" class="form-control" name="workadd_wards" required #workadd_wards="ngModel" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷ,ỹ\s0-9\/-]+$"
+                                    [(ngModel)]="customerInfo.workadd_wards">
+                                <span id="errorMessagename" style="color: red;" *ngIf="workadd_wards.errors?.required && workadd_wards.touched">Phường/Xã/Thị Trấn
+                                    không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="workadd_wards.errors?.pattern && workadd_wards.touched">Phường/Xã/Thị Trấn
+                                    không được chứa kí tự đặc biệt </span>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Thông Tin Liên Lạc">
+                    <div class="row">
+                        <div class="col-6">
+
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Email:</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.email }}</p> -->
+                                <input type="text" class="form-control" name="email" required #email="ngModel" pattern="^[\w\d_\.]{5,32}@[\.\-_\w\d]{2,}(\.[\w\d]{2,4}){1,2}$" [(ngModel)]="customerInfo.email">
+                                <span id="errorMessagename" style="color: red;" *ngIf="email.errors?.required && email.touched">Email không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="email.errors?.pattern && email.touched">Email không đúng định dạng. Ví dụ :
+                                    abc@gmail.com</span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Điện Thoại Di Động 1:</label>
+                                <!-- <p style="color: black; ">{{ customerInfo.phone_1 }}</p> -->
+                                <input type="text" class="form-control" name="phone_1" required #phone_1="ngModel" pattern="((09|03|07|08|05)+([0-9]{8})\b)" [(ngModel)]="customerInfo.phone_1">
+                                <span id="errorMessagename" style="color: red;" *ngIf="phone_1.errors?.required && phone_1.touched">Điện Thoại Di Động 1 không được để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="phone_1.errors?.pattern && phone_1.touched">Điện Thoại Di Động 1 phải có định dạng 09|03|07|08|05 và có 9 chữ số </span>
+                            </div>
+                            <!-- <div class="form-group ">
+                                <label for="exampleInputEmail1 ">Điện Thoại Di Động 2:</label>
+
+                                <input type="text" class="form-control" name="phone_2" required #phone_2="ngModel" pattern="((09|03|07|08|05)+([0-9]{8})\b)" [(ngModel)]="customerInfo.phone_2">
+                                <span id="errorMessagename" style="color: red;" *ngIf="phone_2.errors?.required && phone_2.touched">Điện Thoại Di Động 2 không được
+                                    để trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="phone_2.errors?.pattern && phone_2.touched">Điện Thoại Di Động 2 không được
+                                    chứa kí tự đặc biệt </span>
+                            </div> -->
+                        </div>
+                    </div>
+                </mat-tab>
+            </form>
+
+        </mat-tab-group>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Hủy</button>
+    <button mat-button type="submit" mat-dialog-close [disabled]="userInfo.invalid" (click)="onSubmit()">Thêm</button>
+</mat-dialog-actions>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/assets/dist/css/css_cust/fonts/line-icons.css">
+    <link rel="stylesheet" href="/assets/dist/css/css_cust/animate.css">
+    <link rel="stylesheet" href="/assets/dist/css/css_cust/main.css">
+</head>
+
+<body>
+    <!-- Start-Header -->
+    <app-header></app-header>
+    <!-- End-Header -->
+
+    <p class="title_profile_cust">DANH SÁCH HỢP ĐỒNG</p>
+    <div class="card-info">
+        <div class="row">
+            <div class="card-body">
+                <div class="searchWithDateandValue">
+                    <div class="left">
+                    </div>
+                    <div class="right">
+                        <div class="input-group searchBar">
+                            <input type="search" class="form-control form-control-lg" [(ngModel)]="searchValue" placeholder="Nhập từ khóa cần tìm">
+                        </div>
+                        <div class="date">
+                            <label>Từ Ngày<input id="RfromSearch" type="date" name="dateFrom" [(ngModel)]="dateFrom"
+                                        class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+                            <label style="margin-left: 2%;"> Đến Ngày<input id="RtoSearch" type="date" name="dateTo" [(ngModel)]="dateTo"
+                                        class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+                            <button type="button" class="btn btn-danger btn-custom" (click)="ResetDate()">Xóa
+                                            ngày</button>
+                            <button type="button" class="btn btn-info btn-custom" (click)="Search()">Tìm kiếm
+                                        </button>
+                        </div>
+                    </div>
+                </div>
+
+                <table id="contract_table" *ngIf="contracts" style="text-align: center;" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th (click)="sort('id')">Mã Hợp Đồng&nbsp;<i class="fas fa-sort"></i></th>
+                            <th (click)="sort('id_customer')">Mã Khách Hàng&nbsp;<i class="fas fa-sort"></i></th>
+                            <th (click)="sort('name_contract_owner')">Chủ Hợp Đồng&nbsp;<i class="fas fa-sort"></i></th>
+                            <th (click)="sort('insurance_type')">Loại Bảo Hiểm&nbsp;<i class="fas fa-sort"></i></th>
+                            <th (click)="sort('id_main_benifit')">Mã Gói Bảo Hiểm&nbsp;<i class="fas fa-sort"></i></th>
+                            <th (click)="sort('id_illustration')">Mã Bảng Minh Họa&nbsp;<i class="fas fa-sort"></i></th>
+                            <th (click)="sort('status')">Trạng Thái&nbsp;<i class="fas fa-sort"></i></th>
+                            <th (click)="sort('start_time')">Ngày Đăng Ký&nbsp;<i class="fas fa-sort"></i></th>
+
+                            <th>Chi Tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let contract of contracts | orderBy: key:reverse | paginate: { id: 'listing_pagination' ,itemsPerPage: 8, currentPage: page, totalItems: totalRecords}">
+                            <td>#HD{{contract.id}}</td>
+                            <td>
+                                <p *ngIf="contract.id_customer">#KH{{contract.id_customer}}</p>
+                                <p *ngIf="!contract.id_customer"></p>
+                            </td>
+                            <td>{{contract.name_contract_owner}}</td>
+                            <td>{{contract.insurance_type}}</td>
+                            <td>#G{{contract.id_main_benifit}}</td>
+                            <td>
+                                <a *ngIf="contract.id_illustration" (click)="openDialogIllustrationDetail(contract.id_illustration)">#BMH{{contract.id_illustration}}</a>
+                                <a *ngIf="!contract.id_illustration"></a>
+
+                            </td>
+                            <td>{{contract.status==false?"Chưa Được Xét Duyệt":"Đã Được Xét Duyệt"}}</td>
+                            <td>{{contract.start_time | date: 'dd-MM-yyyy'}}</td>
+                            <td>
+                                <button (click)="contractDetail(contract.id)" class="btn btn-info" style="    font-size: 14px;
+                                    color: white;
+                                    width: 126px;
+                                    padding: 6px 14px 6px 14px;">Chi Tiết</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Mã Hợp Đồng</th>
+                            <th>Mã Khách Hàng</th>
+                            <th>Chủ Hợp Đồng</th>
+                            <th>Loại Bảo Hiểm</th>
+                            <th>Mã Gói Bảo Hiểm</th>
+                            <th>Mã Bảng Minh Họa</th>
+                            <th>Trạng Thái</th>
+                            <th>Ngày Đăng Ký</th>
+                            <th>Chi Tiết</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <pagination-controls style="float: right;" id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+
+            </div>
+        </div>
+    </div>
+
+
+    <a href="#" class="back-to-top" style="display: none;">
+        <i class="lni-arrow-up"></i>
+    </a>
+
+</body>
+
+</html>

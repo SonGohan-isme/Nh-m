@@ -1,0 +1,67 @@
+<div class="searchWithDateandValue">
+    <div class="left">
+    </div>
+    <div class="right">
+        <div class="input-group searchBar">
+            <input type="search" class="form-control form-control-lg" [(ngModel)]="searchValue" placeholder="Nhập từ khóa cần tìm">
+        </div>
+        <div class="date">
+            <label>Từ Ngày<input id="RfromSearch" type="date" name="dateFrom" [(ngModel)]="dateFrom"
+                    class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+            <label style="margin-left: 2%;"> Đến Ngày<input id="RtoSearch" type="date" name="dateTo" [(ngModel)]="dateTo"
+                    class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+            <button type="button" class="btn btn-danger btn-date" (click)="ResetDate()">Xóa
+                ngày</button>
+            <button type="button" class="btn btn-info btn-date" (click)="Search()">Tìm kiếm
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<table style="text-align: center;" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th (click)="sort('id')">Mã Khách Hàng&nbsp;<i class="fas fa-sort"></i></th>
+            <th (click)="sort('code')">Tài Khoản Khách Hàng&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click)="sort('full_name')">Họ và Tên&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click)="sort('birth_date')">Ngày Sinh&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click)="sort('conadd_city')">Địa Chỉ&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click)="sort('phone_1')">Số Điện Thoại&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click)="sort('status')">Trạng Thái&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click)="sort('workadd_no_street')">Nơi Làm Viêc&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click)="sort('created_time')">Ngày Đăng Ký&nbsp;<i class="fa fa-sort"></i></th>
+            <th>Chi Tiết</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customerinfo of customerinfos | orderBy: key:reverse | paginate: { id: 'listing_pagination' ,itemsPerPage: 6, currentPage: page, totalItems: totalRecords} ">
+            <td>#KH{{customerinfo.id}}</td>
+            <td>{{customerinfo.code}}</td>
+            <td>{{customerinfo.full_name}}</td>
+            <td>{{customerinfo.birth_date | date:'dd-MM-yyyy'}}</td>
+            <td>{{customerinfo.conadd_city}}</td>
+            <td>{{customerinfo.phone_1}}</td>
+            <td>{{customerinfo.status==true?'Hoạt Động' : 'Tạm Ngưng'}}</td>
+            <td>{{customerinfo.workadd_no_street}} {{customerinfo.workadd_district}} {{customerinfo.workadd_city}}</td>
+            <td>{{customerinfo.created_time | date: 'dd-MM-yyyy'}}</td>
+            <button *ngIf="customerinfo.status" (click)="customerDetail(customerinfo.id)" class="btn btn-info" style="height: 40px; width: 100px; margin: 10px; color: white;">Chi Tiết</button>
+            <button *ngIf="!customerinfo.status" (click)="editDrafCustomerInfo(customerinfo)" class="btn btn-success" style="height: 40px; width: 100px; margin: 10px; color: white;">Chỉnh Sửa</button>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Mã Khách Hàng</th>
+            <th>Tài Khoản Khách Hàng</th>
+            <th>Họ và Tên</th>
+            <th>Ngày Sinh</th>
+            <th>Địa Chỉ</th>
+            <th>Số Điện Thoại</th>
+            <th>Trạng Thái</th>
+            <th>Nơi Làm Viêc</th>
+            <th>Ngày Đăng Ký</th>
+            <th>Chi Tiết</th>
+        </tr>
+    </tfoot>
+</table>
+<pagination-controls style="float: right;" id="listing_pagination" maxSize="9" directionLinks="true" (pageChange)="page = $event"></pagination-controls>

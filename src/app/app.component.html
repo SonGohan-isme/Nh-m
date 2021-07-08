@@ -1,0 +1,134 @@
+<mat-toolbar class="nav-height fixed-toolbar noprint" *ngIf="authenService.isAuthen">
+    <mat-toolbar-row>
+        <button (click)="openLeftSide()" mat-icon-button><mat-icon>menu</mat-icon></button>
+        <p style="margin: 0px 0px 0px 26px;">{{common.titlePage}}</p>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav (closed)="closeLeftSide()" *ngIf="authenService.isAuthen">
+        <mat-nav-list class="nav-list-fixed">
+            <a mat-list-item (click)="logout()">
+                <img src="../assets/images/exit.png" class="imglink" style="opacity: .8">
+                <span class="brand-text font-weight-light">Thoát</span>
+            </a>
+            <hr style="color: gray;">
+            <a mat-list-item [routerLink]="['/detail-employee-info']">
+                <img [src]="authenService.empolyeeInfo?.name? '../assets/images/profile_man.png' : '../assets/images/profile_women.png' " class="imglink" alt="User Image">
+                <a class="d-block">{{ authenService.empolyeeInfo?.name }}</a>
+            </a>
+            <hr style="color: gray;">
+            <!-- Saler -->
+            <div *ngIf="authenService.id_role=='2'">
+                <a mat-list-item [routerLink]="['/dashboard']">
+                    <mat-icon mat-list-icon>dashboard</mat-icon>Tổng Quan
+                </a>
+                <!-- <a mat-list-item [routerLink]="['/notification']">
+                    <mat-icon mat-list-icon>notifications</mat-icon>Thông Báo
+                </a> -->
+                <a mat-list-item [routerLink]="['/customer']">
+                    <mat-icon mat-list-icon>table_chart</mat-icon>Danh Sách KHTN
+                </a>
+                <a mat-list-item [routerLink]="['/illustration']">
+                    <mat-icon mat-list-icon>description</mat-icon>Bảng Minh Họa
+                </a>
+                <a mat-list-item [routerLink]="['/contract']">
+                    <mat-icon mat-list-icon>table_chart</mat-icon>Danh Sách Hợp Đồng
+                </a>
+                <a mat-list-item [routerLink]="['/income']">
+                    <mat-icon mat-list-icon>credit_card</mat-icon>Thu Nhập
+                </a>
+                <a mat-list-item [routerLink]="['/mail']">
+                    <mat-icon mat-list-icon>email</mat-icon>Hộp Thư
+                </a>
+                <a mat-list-item [routerLink]="['/document']">
+                    <mat-icon mat-list-icon>library_books</mat-icon>Tài Liệu
+                </a>
+                <a mat-list-item [routerLink]="['/change-pass']">
+                    <mat-icon mat-list-icon>settings</mat-icon>Đổi Mật Khẩu
+                </a>
+            </div>
+
+            <!-- claim appraiser -->
+            <div *ngIf="authenService.id_role=='4'">
+                <a mat-list-item [routerLink]="['/claim-request-manage']">
+                    <mat-icon mat-list-icon>table_chart</mat-icon>Quản Lý Yêu Cầu Xét Duyệt
+                </a>
+                <a mat-list-item [routerLink]="['/mail']">
+                    <mat-icon mat-list-icon>table_chart</mat-icon>Hộp thư
+                </a>
+                <!-- <a mat-list-item [routerLink]="['/appraiser-contract-manage']">
+                    <mat-icon mat-list-icon>table_chart</mat-icon>Xem Hợp Đồng
+                </a> -->
+                <a mat-list-item [routerLink]="['/change-pass']">
+                    <mat-icon mat-list-icon>settings</mat-icon>Đổi Mật Khẩu
+                </a>
+            </div>
+
+            <!-- admin -->
+            <div *ngIf="authenService.id_role=='1'">
+                <!-- <a mat-list-item [routerLink]="['/approve-contract']"></a> -->
+                <a mat-list-item [routerLink]="['/employee-manage']">
+                    <mat-icon mat-list-icon>table_chart</mat-icon>Quản Lý Nhân Viên
+                </a>
+                <a mat-list-item [routerLink]="['/customer-manage']">
+                    <mat-icon mat-list-icon>table_chart</mat-icon>Quản Lý Tài Khoản Khách Hàng
+                </a>
+                <a mat-list-item [routerLink]="['/mail']">
+                    <mat-icon mat-list-icon>email</mat-icon>Hộp Thư
+                </a>
+                <a mat-list-item [routerLink]="['/change-pass']">
+                    <mat-icon mat-list-icon>settings</mat-icon>Đổi Mật Khẩu
+                </a>
+                <!-- <a mat-list-item [routerLink]="['/commission-manage']">
+                    <mat-icon mat-list-icon>home</mat-icon>Quản Lý Phần Trăm Hoa Hồng
+                </a>
+                <a mat-list-item [routerLink]="['/solution-manage']">
+                    <mat-icon mat-list-icon>home</mat-icon>Quản Lý Gói Quyền Lợi
+                </a>
+                <a mat-list-item [routerLink]="['/dashboard']">
+                    <mat-icon mat-list-icon>home</mat-icon>Quản Lý Saler
+                </a>
+                <a mat-list-item [routerLink]="['/dashboard']">
+                    <mat-icon mat-list-icon>home</mat-icon>FeedBack
+                </a>
+                <a mat-list-item [routerLink]="['/dashboard']">
+                    <mat-icon mat-list-icon>home</mat-icon>KPI Nhóm
+                </a>
+                <a mat-list-item [routerLink]="['/dashboard']">
+                    <mat-icon mat-list-icon>home</mat-icon>Doanh Thu
+                </a>
+                <a mat-list-item [routerLink]="['/dashboard']">
+                    <mat-icon mat-list-icon>home</mat-icon>Lịch Sử thanh toán QLBH
+                </a> -->
+            </div>
+
+            <!-- appraiser -->
+            <div *ngIf="authenService.id_role=='3'">
+                <a mat-list-item [routerLink]="['/appraiser-request-manage']">
+                    <mat-icon mat-list-icon>table_chart</mat-icon>Quản Lý Yêu Cầu Xét Duyệt
+                </a>
+                <a mat-list-item [routerLink]="['/mail']">
+                    <mat-icon mat-list-icon>table_chart</mat-icon>Hộp thư
+                </a>
+                <!-- <a mat-list-item [routerLink]="['/appraiser-contract-manage']">
+                    <mat-icon mat-list-icon>table_chart</mat-icon>Xem Hợp Đồng
+                </a> -->
+                <a mat-list-item [routerLink]="['/change-pass']">
+                    <mat-icon mat-list-icon>settings</mat-icon>Đổi Mật Khẩu
+                </a>
+            </div>
+
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div [ngClass]="{
+        'content-move-left': !isOpened,
+        'content-move-right': isOpened
+      }">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Vui Lòng Đợi Trong Giây Lát ...</p>
+</ngx-spinner>

@@ -1,0 +1,78 @@
+<div class="searchWithDateandValue">
+    <div class="left">
+    </div>
+    <div class="right">
+        <div class="input-group searchBar">
+            <input type="search" class="form-control form-control-lg" [(ngModel)]="searchValue" placeholder="Nhập từ khóa cần tìm">
+        </div>
+        <div class="date">
+            <label>Từ Ngày<input id="RfromSearch" type="date" name="dateFrom" [(ngModel)]="dateFrom"
+                    class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+            <label style="margin-left: 2%;"> Đến Ngày<input id="RtoSearch" type="date" name="dateTo" [(ngModel)]="dateTo"
+                    class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+            <button type="button" class="btn btn-danger btn-date" (click)="ResetDate()">Xóa
+                ngày</button>
+            <button type="button" class="btn btn-info btn-date" (click)="Search()">Tìm kiếm
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card-body">
+    <table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th (click)="sort('id')">Mã Nhân Viên&nbsp;<i class="fas fa-sort"></i></th>
+                <th (click)="sort('code')">Tên Account&nbsp;<i class="fas fa-sort"></i></th>
+                <th (click)="sort('name')">Họ và Tên&nbsp;<i class="fas fa-sort"></i></th>
+                <th (click)="sort('date_of_birth')">Ngày Sinh&nbsp;<i class="fas fa-sort"></i></th>
+                <th (click)="sort('phone')">Số Điện Thoại&nbsp;<i class="fas fa-sort"></i></th>
+                <th (click)="sort('email')">Email&nbsp;<i class="fas fa-sort"></i></th>
+                <th (click)="sort('in_dept')">Phòng Ban&nbsp;<i class="fas fa-sort"></i></th>
+                <th (click)="sort('status')">Trạng Thái&nbsp;<i class="fas fa-sort"></i></th>
+                <th>Chi Tiết</th>
+                <th>Thao Tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employeeinfo of data| orderBy: key:reverse | paginate: { id: 'listing_pagination' ,itemsPerPage: 6, currentPage: page, totalItems: totalRecords};let i = index">
+                <td>#NV{{employeeinfo.id}}</td>
+                <td>{{employeeinfo.code}}</td>
+                <td>{{employeeinfo.name}}</td>
+                <td>{{employeeinfo.date_of_birth | date: 'dd-MM-yyyy'}}</td>
+                <td>{{employeeinfo.phone}}</td>
+                <td>{{employeeinfo.email}}</td>
+                <td>{{employeeinfo.in_dept}}</td>
+                <td>
+                    <p *ngIf="employeeinfo.status!=null">{{employeeinfo.status == 1?"Đang Hoạt Động":"Tạm Ngưng"}}</p>
+                    <p *ngIf="employeeinfo.status==null"></p>
+                </td>
+                <td>
+                    <button (click)="EmployeeDetail(employeeinfo.id)" class="btn btn-info" style="height: 40px; width: 100px; margin: 10px; color: white;">Chi Tiết</button>
+                </td>
+
+                <td>
+                    <button *ngIf="employeeinfo.code" class="btn btn-block btn-success" [disabled]="employeeinfo.status==0? true : false" style="height: 40px; width: 150px; margin: 10px; color: white;" (click)="resetAccPassword(employeeinfo)">Đặt Lại Mật Khẩu</button>
+                    <button *ngIf="!employeeinfo.code" (click)="openDialog(employeeinfo)" style="height: 40px; width: 150px; margin: 10px; color: white;" class="btn btn-block btn-primary">Thêm Tài Khoản</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Mã Nhân Viên</th>
+                <th>Tên Account</th>
+                <th>Họ và Tên</th>
+                <th>Ngày Sinh</th>
+                <th>Số Điện Thoại</th>
+                <th>Email</th>
+                <th>Phòng Ban</th>
+                <th>Trạng Thái</th>
+                <th>Chi Tiết</th>
+                <th>Thao Tác</th>
+            </tr>
+        </tfoot>
+    </table>
+    <pagination-controls style="float: right;" id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+</div>

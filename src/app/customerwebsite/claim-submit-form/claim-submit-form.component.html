@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+
+
+<body>
+    <mat-dialog-content class="mat-typography" id="mat-typography">
+        <div class="card-header">
+            <h2><b>Nộp hồ sơ yêu cầu giải quyết quyền lợi bảo hiểm</b></h2>
+        </div>
+        <form class="form-container" #requestForm="ngForm">
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="inputName">Bên mua bảo hiểm</label>
+                    <input type="text" class="form-control" id="inputName" name="code_sender" [(ngModel)]="code_sender"
+                        required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="inputPhone">Số điện thoại liên hệ</label>
+                    <input type="number" class="form-control" id="inputPhone" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" required>
+                </div>
+            </div>
+
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0"><b>Giới tính</b></legend>
+
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridGender" id="gridMale" value="male"
+                                checked>
+                            <label class="form-check-label" for="gridRadios1">
+                                Nam
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridGender" id="gridFemale"
+                                value="female">
+                            <label class="form-check-label" for="gridRadios2">
+                                Nữ
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="inputContractID">Mã số hợp đồng</label>
+                    <select id="inputContractID" class="form-control" [formControl]="selectContract" required
+                        (change)="onChangeContract($event.target.value)">
+                        <option selected>Chọn hợp đồng...</option>
+                        <option *ngFor="let contract of listContracts" [value]="contract.id">
+                            #HD{{contract.id}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputName2">Người thụ hưởng quyền lợi</label>
+                    <input type="text" class="form-control" id="inputName2">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputBenefit">Quyền lợi bảo hiểm</label>
+                    <select id="inputBenefit" class="form-control">
+                        <option selected>Chọn loại quyền lợi bảo hiểm...</option>
+                        <option *ngFor="let mainBenefit of listMainBenefitScale" [value]="mainBenefit.id">
+                            {{mainBenefit.name}}
+                        </option>
+                        <option *ngFor="let subBenefit of listSubBenefitScale" [value]="subBenefit.id">
+                            {{subBenefit.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputAddress">Địa chỉ thường trú</label>
+                <input type="text" class="form-control" id="inputAddress" required>
+            </div>
+
+            <div class="form-group">
+                <label for="inputAddress2">Địa chỉ nhận thư</label>
+                <input type="text" class="form-control" id="inputAddress2">
+            </div>
+
+            <div class="form-group">
+                <div class="custom-upload-div">
+                    <label for="inputFile">Tải tài liệu lên</label>
+                    <p *ngFor="let file of selectedFile ; index as i" class="list-file">{{ file.name }} &nbsp;&nbsp;
+                        <span (click)="removeFile(i)" style="padding: 5px;"><i class="fas fa-times"
+                                style="color: gray;"></i></span>
+                    </p>
+                    <input id="file" type="file" (change)="onChangeFile($event)" />
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="validationTextarea">Mô tả yêu cầu cần giải quyết quyền lợi</label>
+                <textarea class="form-control" id="validationTextarea" name="name" [(ngModel)]="name"
+                    required></textarea>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="submit" class="btn btn-primary" [disabled]="requestForm.invalid" (click)="sendReq()">Xác
+            nhận</button>
+        <button type="button" class="btn btn-info" (click)="dowloadPDF()">Xuất tài liệu PDF</button>
+    </mat-dialog-actions>
+</body>
+
+
+</html>

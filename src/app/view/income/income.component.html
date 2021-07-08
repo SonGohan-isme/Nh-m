@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="background: none;">
+
+    <div class="income">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Thu Nhập Theo Hợp Đồng</h1>
+            </div>
+            <div class="card-body" style=" overflow: auto;">
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Mã Hợp Đồng</th>
+                            <th>Thu Nhập</th>
+                            <th>Doanh Thu</th>
+                            <th>Thời Gian</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let revenue of listRevenueEmployee">
+                            <td>#HD{{revenue.id_contract}}</td>
+                            <td>{{revenue.income | currency :"VND"}}</td>
+                            <td>{{revenue.revenue_val | currency :"VND"}}</td>
+                            <td>{{revenue.create_time | date:'dd/MM/yyyy'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls style="float: right;" id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Thu Nhập Trong Năm Hiện Tại</h1>
+            </div>
+            <div class="card-body">
+                <table class=" table table-bordered ">
+                    <thead>
+                        <th></th>
+                        <th>Tháng</th>
+                        <th>Thu Nhập</th>
+                        <th>Doanh Thu</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of listMoneyCurrent, index as i">
+                            <td *ngIf="i==0" [attr.rowspan]="listMoneyCurrent.length" class="merge-row">Doanh Thu Đã Nhận</td>
+                            <td *ngIf="i==0">Tháng {{listMoneyCurrent[0].month}}</td>
+                            <td *ngIf="i==0">{{ listMoneyCurrent[0].income | currency :"VND" }}</td>
+                            <td *ngIf="i==0">{{ listMoneyCurrent[0].revenue | currency :"VND"}}</td>
+                            <td *ngIf="i!=0">Tháng {{item.month}}</td>
+                            <td *ngIf="i!=0">{{ item.income | currency :"VND"}}</td>
+                            <td *ngIf="i!=0">{{ item.revenue | currency :"VND"}}</td>
+                        </tr>
+                        <tr *ngFor="let item of listMoneyFuture, index as i" style="color: red;">
+                            <td *ngIf="i==0" [attr.rowspan]="listMoneyFuture.length" class="merge-row">Doanh Thu Dự Kiến</td>
+                            <td *ngIf="i==0">Tháng {{ listMoneyFuture[0].month }}</td>
+                            <td *ngIf="i==0">{{ listMoneyFuture[0].income | currency :"VND"}}</td>
+                            <td *ngIf="i==0">{{ listMoneyFuture[0].revenue | currency :"VND"}}</td>
+                            <td *ngIf="i!=0">Tháng {{item.month}}</td>
+                            <td *ngIf="i!=0">{{ item.income | currency :"VND"}}</td>
+                            <td *ngIf="i!=0">{{ item.revenue | currency :"VND"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

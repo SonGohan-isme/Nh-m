@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-12">
+                            <div class="card" style="margin-bottom: 6%;">
+                                <div class="card-body">
+                                    <mat-tab-group>
+                                        <mat-tab label="Thông tin Cơ Bản">
+                                            <div class="row">
+                                                <div class=" col-6 ">
+                                                    <h3>Thông tin Cơ Bản</h3>
+
+
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Họ Tên</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.name }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Giới Tính</label>
+                                                        <p style="color: red; " *ngIf="employeinfoDTO.gender">Nam</p>
+                                                        <p style="color: red; " *ngIf="!employeinfoDTO.gender">Nữ</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Tình Trạng Hôn Nhân</label>
+                                                        <p style="color: red; " *ngIf="employeinfoDTO.marital_status">Đã kết hôn</p>
+                                                        <p style="color: red; " *ngIf="!employeinfoDTO.marital_status">Chưa kết hôn</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Ngày Sinh</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.date_of_birth | date: 'dd-MM-yyyy'}}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Tuổi</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.age }}</p>
+                                                    </div>
+
+
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Giấy Tờ Nhân Thân Số</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.id_card }}</p>
+                                                    </div>
+
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Dân Tộc</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.national }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </mat-tab>
+
+                                        <mat-tab label="Địa Chỉ ">
+                                            <div class="row">
+                                                <div class="col-6 ">
+                                                    <h4>Địa Chỉ Nơi Ở Hiện Tại</h4>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.curadd_no_street }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.curadd_city }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.curadd_district }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.curadd_wards }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 ">
+                                                    <h4>Địa Chỉ Thường Chú</h4>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.peradd_no_street }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.peradd_city }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.peradd_district }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.peradd_wards }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6 ">
+                                                    <h4>Địa Chỉ Liên Lạc Đặc Biệt</h4>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Số Nhà và Tên Đường</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.conadd_no_street }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Thành Phố/Tỉnh</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.conadd_city }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Quận/Huyện</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.conadd_district }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Phường/Xã/Thị Trấn:</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.conadd_wards }}</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </mat-tab>
+                                        <mat-tab label="Thông Tin Liên Lạc">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3>ĐT cố Định và Email</h3>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Email:</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.email }}</p>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="exampleInputEmail1 ">Điện Thoại Di Động 1:</label>
+                                                        <p style="color: red; ">{{ employeinfoDTO.phone }}</p>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </mat-tab>
+                                    </mat-tab-group>
+                                </div>
+                                <div class="custom-foot">
+                                    <button *ngIf="showDelayButton" type="button " class="btn btn-danger btn-function" (click)="openDialogPauseEmployee(employeinfoDTO)">Tạm Ngưng</button>
+                                    <button type="button " class="btn btn-success btn-function" (click)="openDialogEdit()">Chỉnh Sửa Thông Tin</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

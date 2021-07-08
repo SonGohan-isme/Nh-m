@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<header>
+</header>
+
+<body style="background: none;">
+    <div class="container" id="content" #content>
+        <div class="noprint">
+            <h1 class="title"><b>Tạo Bảng Minh Họa</b></h1>
+        </div>
+        <div class="infoUser noprint">
+            Tên Khách Hàng: {{ customerInfo.full_name }}
+        </div>
+
+        <div>
+            <div>
+                <fieldset>
+                    <legend>Ngày Dự Kiến Bắt Đầu Quyền Lợi Bảo Hiểm</legend>
+                    <div class="form-group">
+                        <input id="create_time_ill" type="date" class="form-control" [(ngModel)]="create_time_ill">
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: auto auto;">
+            <div>
+
+                <fieldset>
+                    <legend>Người Được Bảo Hiểm</legend>
+                    <table style="display: block;">
+                        <tr>
+                            <td>Tên</td>
+                            <td><input id="nameCustomer" name="full_name" class="form-control" [(ngModel)]="illustrationMainBenifit.full_name_insured_person" required pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéếêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀẾỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳýỵỷỹ\s]+$"
+                                    #name="ngModel">
+                                <span id="errorMessagename" style="color: red;" *ngIf="name.errors?.required && name.touched">Họ và tên không được để
+                                    trống</span>
+                                <span id="errorMessagename" style="color: red;" *ngIf="name.errors?.pattern && name.touched">Họ và tên không đúng định dạng
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nhóm Nghề</td>
+                            <td>
+                                <select [(ngModel)]="illustrationMainBenifit.carrier_group_insured_person" name="carrier_group_insured_person" class="form-control">
+                                    <option *ngFor="let carrer_group of carrer_groups" [value]="carrer_group.value">
+                                        {{carrer_group.viewValue}}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ngày Sinh</td>
+                            <td><input type="date" id="birthDayInsuredPerson" class="form-control" required #dateofbirth="ngModel" (ngModelChange)="changeDate($event)" [ngModel]="illustrationMainBenifit.birth_date_insured_person | date:'yyyy-MM-dd'" max="2019-12-31">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Giới Tính</td>
+                            <td><select class="form-control" id="genderInsuredPerson" required #gender="ngModel" [(ngModel)]="illustrationMainBenifit.gender_insured_person">
+                                    <option [value]=true>Nam</option>
+                                    <option [value]=false>Nữ</option>
+                                </select>
+                                <span id="errorMessagename" style="color: red;" *ngIf="gender.errors?.required && name.touched">Giới Tính không được để
+                                    trống</span>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Bên Mua Bảo Hiểm</legend>
+                    <div class="row">
+                        <p>Tên</p>
+                        <input class="form-control" value="{{ customerInfo.full_name }}" name="ten" [(ngModel)]="illustrationMainBenifit.full_name_insurance_buyer" readonly>
+                    </div>
+                    <div class="row">
+                        <p>Quan Hệ Với Người Được Bảo Hiểm</p>
+                        <select class="form-control" id="buyerRelation" [(ngModel)]="illustrationMainBenifit.insurance_buyer_relation_insured_person" (change)="insuranceBuyerRelationValue()">
+                            <option value="Bố/Mẹ Đẻ">Bố/Mẹ Đẻ</option>
+                            <option value="Con Cái">Con Cái</option>
+                            <option value="Vợ/Chồng">Vợ/Chồng</option>
+                            <option value="Bản Thân">Bản Thân</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div>
+            <div>
+                <fieldset>
+                    <legend>Sản Phẩm Chính</legend>
+                    <table>
+                        <tr>
+                            <td>Sản Phẩm</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select class="form-control" [(ngModel)]="mainBenifitSelect">
+                                    <option [ngValue]="benifit" *ngFor="let benifit of mainBenifitList">{{
+                                        benifit.benifit_name }}</option>
+                                </select>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Thời Hạn (Năm)</td>
+                            <td>Mệnh Giá (VNĐ)</td>
+                            <td>Phí Bảo Hiểm (VNĐ)</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control" value="{{ mainBenifitSelect.fee_period }}" readonly>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" id="menhgia" required #menhgia="ngModel" [(ngModel)]="illustrationMainBenifit.denominations" min="{{ mainBenifitSelect.minimum_value }}" pattern="^[0-9]+$">
+                            </td>
+                            <td>
+                                <input class="form-control" readonly [(ngModel)]="illustrationMainBenifit.fee_value">
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+        <div>
+            <div class="col-12">
+
+                <fieldset>
+                    <legend>Quyền Lợi Bảo Hiểm Bổ Sung Của {{illustrationMainBenifit.full_name_insured_person}}</legend>
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Nhóm Nghề Nghiệp</td>
+                            <td>Mệnh Giá</td>
+                            <td>Phí Bảo Hiểm</td>
+                        </tr>
+                        <tr *ngFor="let benifit of subBenifitListCopy;index as i">
+                            <td><input type="checkbox" (change)="activeSubIllustration(i)"></td>
+                            <td></td>
+                            <td>{{ benifit.benifit_name }}</td>
+                            <td>
+                                <input class="form-control" value="{{ illustrationMainBenifit.carrier_group_insured_person }}" name="carrier_group_extra_insured_person" readonly>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" name="denominations" #menhgia="ngModel" [(ngModel)]="benifit.denominations" [attr.disabled]="benifit.isDisable?'':null" min="50000000" pattern="^[0-9]+$">
+                            </td>
+                            <td>
+                                <input class="form-control" value="{{ benifit.fee_value }}" name="fee_value" readonly>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+
+            </div>
+        </div>
+        <div class="col-12" *ngFor="let item of relatedPerson ; index as i">
+            <fieldset>
+                <legend>
+                    Người Được bảo hiểm bổ sung
+                    <button class="w3-button w3-xlarge w3-circle w3-red w3-card-4 customPlusButton" (click)="removeField(i)">-</button>
+                </legend>
+                <p>Họ Và Tên</p>
+                <input class="form-control" [(ngModel)]="item.full_name" required pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀÉếỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$" #nameAddPeople="ngModel">
+                <span id="errorMessagename" style="color: red;" *ngIf="nameAddPeople.errors?.required && nameAddPeople.touched">Họ và tên
+                    không được để trống</span>
+                <span id="errorMessagename" style="color: red;" *ngIf="nameAddPeople.errors?.pattern && nameAddPeople.touched">Họ và tên
+                    không đúng định dạng </span>
+                <p>Quan Hệ Với Người Được Bảo Hiểm</p>
+                <select class="form-control" [(ngModel)]="item.relation" #relationPeople="ngModel" required>
+                    <option>Bố/Mẹ Đẻ</option>
+                    <option>Con Cái</option>
+                    <option>Vợ/Chồng</option>
+                </select>
+                <span id="errorMessagename" style="color: red;" *ngIf="relationPeople.errors?.pattern && relationPeople.touched">Quan Hệ Với Người Được Bảo Hiểm
+                    không được để trống </span>
+                <p>Ngày Sinh</p>
+                <input class="form-control" type="date" [(ngModel)]="item.date_of_birth" max="2019-12-31" required #relationdateofbirth="ngModel">
+                <span id="errorMessagename" style="color: red;" *ngIf="relationdateofbirth.errors?.pattern && relationdateofbirth.touched">Ngày Sinh
+                    không được để trống </span>
+                <p>Giới Tính</p>
+                <td><select class="form-control" [(ngModel)]="item.gender">
+                        <option [value]=true>Nam</option>
+                        <option [value]=false>Nữ</option>
+                    </select></td>
+                <p>Nhóm Nghề</p>
+                <select [(ngModel)]="item.carreer_group" name="carrier_group=" class="form-control">
+                    <option *ngFor="let carrer_group of carrer_groups" [value]="carrer_group.value">
+                        {{carrer_group.viewValue}}</option>
+                </select>
+
+            </fieldset>
+            <h3>Quyền lợi bổ sung</h3>
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Nhóm Nghề Nghiệp</td>
+                    <td>Mệnh Giá</td>
+                    <td>Phí Bảo Hiểm</td>
+                </tr>
+                <tr *ngFor="let benifit of item.listSubBenifit ; index as i2">
+                    <td><input type="checkbox" (change)="activeSubIllustrationRelatedPerson(i,i2)"></td>
+                    <td></td>
+                    <td>{{ benifit.benifit_name }}</td>
+                    <td>
+                        <input class="form-control" value="{{ item.carreer_group }}" [(ngModel)]="benifit.carrier_group_extra_insured_person" name="carrier_group_extra_insured_person" readonly>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" name="denominations" [(ngModel)]="benifit.denominations" [attr.disabled]="benifit.isDisable?'':null" min="50000000">
+                    </td>
+                    <td>
+                        <input class="form-control" value="{{ benifit.fee_value }}" name="fee_value" readonly>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="formButtonP noprint">
+            <button class="w3-button w3-xlarge w3-circle w3-red w3-card-4 customPlusButton" (click)="addField()">+</button>
+            <p>Thêm Người Được Bảo Hiểm Bổ Sung</p>
+        </div>
+
+        <div style="box-shadow: 0 3px 6px 3px rgb(0 0 0 / 10%);padding: 2%;">
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <p>Định Kỳ Trả Phí</p>
+                        <select class="form-control" [(ngModel)]="mulPeriod" #paymentperiod="ngModel" required>
+                            <option [ngValue]="item" *ngFor="let item of reference.multiplierForPaymentPeriod">
+                                {{item.description}}</option>
+                        </select>
+                        <span id="errorMessagename" style="color: red;" *ngIf="paymentperiod.errors?.pattern && paymentperiod.touched">Định Kỳ Trả Phí
+                            không được để trống </span>
+                        <br />
+                        <button class="form-control noprint" style="margin-top:10px;" (click)="onCalculate()" [disabled]="checkCountPayment">Tính
+                            Phí</button>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <p style="float: right;">Tổng Phí Bảo Hiểm</p>
+                </div>
+                <div style="color: red;">
+                    <p>{{ totalPayment.toLocaleString() }} VNĐ</p>
+                </div>
+            </div>
+
+        </div>
+        <button class="form-control noprint" style="margin-top: 20px; margin-bottom: 20px;" (click)="save()" [disabled]="!checkedTick">LƯU BẢNG MINH HỌA</button>
+        <button class="form-control noprint" (click)="dowloadPDF()">XUẤT PDF</button>
+    </div>
+
+
+</body>
+
+</html>

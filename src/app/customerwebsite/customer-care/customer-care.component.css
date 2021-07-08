@@ -1,0 +1,316 @@
+.fullPage{
+    overflow: hidden;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.block-bannerBreadcrumbWrap {
+    position: relative;
+}
+
+.block-bannerBreadcrumbWrap .block-bannerPage {
+    position: relative;
+}
+
+.slick-slider{
+    display: block;
+    box-sizing: border-box;
+    user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-weight: normal;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+.slick-slider .slick-track, .slick-slider .slick-list {
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slick-initialized .slick-slide {
+    display: block;
+}
+
+.slick-slide {
+    /* display: none; */
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+
+.slick-slide img {
+    display: block;
+}
+
+img, svg {
+    vertical-align: middle;
+}
+
+img {
+    /* padding-top: 70px; */
+    border-style: none;
+}
+
+img, object, embed {
+    max-width: 100%;
+}
+
+.block-bannerBreadcrumbWrap .block-bannerPage .box-content {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    transform: translate(0, -50%);
+    z-index: 1;
+}
+
+.title-bn {
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-transform: uppercase;
+    color: #004fb6;
+    border-bottom: 3px solid #004fb6;
+    display: inline-block;
+}
+
+/* @media (min-width: 1200px) */
+.container {
+    max-width: 1200px;
+}
+
+/* @media (min-width: 1200px) */
+.container {
+    /* max-width: 1170px; */
+    width: 100%;
+}
+
+.container {
+    position: static;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    /* width: 100%; */
+}
+
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+
+main {
+    clear: both;
+}
+
+.block-articleDetail {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.title-news {
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #333333;
+}
+
+.block-articleDetail .full-content p {
+    margin-bottom: 15px;
+}
+
+.block-articleDetail .full-content ul {
+    padding-left: 25px;
+    list-style-type: disc;
+}
+
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+b, strong {
+    font-weight: bolder;
+}
+
+.block-articleDetail .full-content p {
+    margin-bottom: 15px;
+}
+
+strong span {
+    font-weight: bold;
+}
+
+.classification-table {
+    zoom: 1;
+}
+
+.classification-table table {
+    border: 1px solid #80cdc8;
+    width: 100%;
+}
+table {
+    border-collapse: collapse;
+    font-size: inherit;
+    border-spacing: 0;
+}
+
+.classification-table table thead {
+    background: #004fb6;
+}   
+
+.classification-table table thead th {
+    font-size: 20px;
+    vertical-align: middle;
+    border-left: 1px solid #d3d3d3;
+    padding: 12px 15px;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.classification-table table thead th span {
+    font-size: 16px;
+    -webkit-box-pack: center;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    font-weight: 300;
+    text-transform: none;
+}
+
+.classification-table table tbody tr {
+    background: #fff;
+}
+
+.classification-table table tbody td {
+    padding: 7px 50px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.classification-table table tbody td .td-icon .icon img {
+    max-width: 100%;
+}
+
+.classification-table table tbody td .td-icon {
+    -webkit-box-align: center;
+    display: -webkit-box;
+    align-items: center;
+}
+
+.classification-table table tbody td .td-icon .icon {
+    width: 45px;
+    min-width: 45px;
+    height: 45px;
+}
+
+.classification-table table tbody td .td-icon p {
+    padding-left: 55px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.block-articleDetail .full-content p {
+    margin-bottom: 15px;
+}
+
+td img {
+    vertical-align: top;
+}
+
+.classification-table table tbody tr:nth-child(2n) {
+    background: #e5edf8;
+}
+
+.block-articleDetail .full-content p {
+    margin-bottom: 15px;
+}
+
+.individual-customers-table {
+    zoom: 1;
+    overflow-x: hidden;
+}
+
+.individual-customers-table table {
+    width: 100%;
+    min-width: 1000px;
+}
+
+.individual-customers-table table thead {
+    background: #004fb6;
+}
+
+.individual-customers-table table thead tr:first-child {
+    border-top: 1px solid #d3d3d3;
+}
+
+.individual-customers-table table thead th:first-child, .individual-customers-table table thead th:last-child {
+    border-right: 1px solid #d3d3d3;
+    border-left: 1px solid #d3d3d3;
+}
+
+.individual-customers-table table thead th {
+    vertical-align: middle;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.individual-customers-table table thead th p {
+    text-transform: none;
+}
+
+.individual-customers-table tbody td:first-child {
+    border-right: 1px solid #d3d3d3;
+    border-left: 1px solid #80cdc8;
+    color: #333;
+}
+
+.individual-customers-table tbody td {
+    border-top: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+    background: #e5edf8;
+    padding: 12px 15px;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+}

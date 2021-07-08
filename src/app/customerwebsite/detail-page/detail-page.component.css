@@ -1,0 +1,198 @@
+.page-header {
+    /* background-image: url("https://www.daibanglua.com/wp-content/uploads/2020/10/2-2.jpg"); */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 400px;
+    width: 100%;
+    margin-top: 3%;
+    padding: 0;
+    z-index: 1
+}
+
+.prddt-btn {
+    position: relative;
+    margin-bottom: 0;
+    color: #fff;
+    background: #ee1c23;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-family: 'myriad_proregular',Arial, sans-serif;
+    font-size: 18px;
+    padding: 4px 15px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.div-sb-ht1-1 {
+    background: #49b1dc;
+}
+.p-ptb-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.p-t-c {
+    text-align: center !important;
+}
+.p-cl-w, .p-cl-w-h:hover {
+    color: #fff;
+}
+
+p {
+    color: #333;
+    font-weight: 400;
+    font-family: open sans, sans-serif;
+    margin: 0;
+    font-size: 14px;
+}
+
+#blog-single .blog-post .post-content {
+    padding: 30px;
+}
+
+#blog-single .blog-post .post-thumb img {
+    width: 100%;
+}
+
+#blog-single .blog-post {
+    background: #fff;
+    box-shadow: 0 0 40px 0 rgb(0 0 0 / 10%);
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.page-header::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: -1;
+}
+
+.breadcrumb-wrapper h2 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 28px;
+    margin-bottom: 10px;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.breadcrumb-wrapper {
+    padding: 180px 0 100px;
+}
+
+#blog-single {
+    padding: 60px 0;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+.title-cust {
+    font-size: 27px;
+    color: #222;
+    font-weight: 700;
+    font-family: titillium web, sans-serif;
+}
+
+.footer-clean {
+    padding:50px 0;
+    background-color:#fff;
+    color:#4b4c4d;
+  }
+  
+  .footer-clean h3 {
+    margin-top:0;
+    margin-bottom:12px;
+    font-weight:bold;
+    font-size:16px;
+  }
+  
+  .footer-clean ul {
+    padding:0;
+    list-style:none;
+    line-height:1.6;
+    font-size:14px;
+    margin-bottom:0;
+  }
+  
+  .footer-clean ul a {
+    color:inherit;
+    text-decoration:none;
+    opacity:0.8;
+  }
+  
+  .footer-clean ul a:hover {
+    opacity:1;
+  }
+  
+  .footer-clean .item.social {
+    text-align:right;
+  }
+  
+  @media (max-width:767px) {
+    .footer-clean .item {
+      text-align:center;
+      padding-bottom:20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .footer-clean .item.social {
+      text-align:center;
+    }
+  }
+  
+  .footer-clean .item.social > a {
+    font-size:24px;
+    width:40px;
+    height:40px;
+    line-height:40px;
+    display:inline-block;
+    text-align:center;
+    border-radius:50%;
+    border:1px solid #ccc;
+    margin-left:10px;
+    margin-top:22px;
+    color:inherit;
+    opacity:0.75;
+  }
+  
+  .footer-clean .item.social > a:hover {
+    opacity:0.9;
+  }
+  
+  @media (max-width:991px) {
+    .footer-clean .item.social > a {
+      margin-top:40px;
+    }
+  }
+  
+  @media (max-width:767px) {
+    .footer-clean .item.social > a {
+      margin-top:10px;
+    }
+  }
+  
+  .footer-clean .copyright {
+    margin-top:14px;
+    margin-bottom:0;
+    font-size:13px;
+    opacity:0.6;
+  }

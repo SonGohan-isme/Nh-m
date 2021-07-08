@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <div class="content-wrapper">
+            <div class="content col-12">
+                <div class="card">
+                    <mat-tab-group>
+                        <mat-tab label="Thông Tin Chi tiết Hợp Đồng">
+
+                            <!-- table -->
+                            <div class="card" style="height: 700px;">
+
+                                <div class="card-body" style="overflow: auto; ">
+                                    <table class=" table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Tiêu Đề</th>
+                                                <th>Thông tin</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mã Hợp Đồng</td>
+                                                <td>#HD{{contracts?.id}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mã Khách Hàng</td>
+                                                <td>#KH{{contracts?.id_customer}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Chủ Hợp Đồng</td>
+                                                <td>{{contracts?.name_contract_owner}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Loại Bảo Hiểm</td>
+                                                <td>{{contracts?.insurance_type}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mã Gói Bảo Hiểm</td>
+                                                <td>#G{{contracts?.id_main_benifit}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mã Bản Minh Họa</td>
+                                                <td>#BMH{{contracts?.id_illustration}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ngày Đăng Ký</td>
+                                                <td>{{contracts?.start_time | date: 'dd-MM-yyyy'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ngày Hết Hạn</td>
+                                                <td>{{contracts?.end_time | date: 'dd-MM-yyyy'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Trạng Thái</td>
+                                                <td>{{contracts?.status==false?'Chưa Hoạt Động':'Đang Hoạt Động'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Trạng Thái Phê Duyệt</td>
+                                                <td>{{contracts?.approval_status}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Kỳ Hạn Đóng Phí</td>
+                                                <td>{{payment_period}}</td>
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- table -->
+                        </mat-tab>
+                        <mat-tab label="Tài Liệu Đính Kèm">
+                            <div>
+                                <p class="form-control-custom" *ngFor="let doc of listDocument"><a href="{{doc.url}}">{{doc.name_document}}</a></p>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <!-- <button *ngIf="authenService.id_role=='2' && (contracts.approval_status == 'CXD' || contracts.approval_status == 'YCT')" type="button" class="btn btn-default" (click)="openDialogChange()">Sửa
+                        Đổi</button>
+                    <button *ngIf="authenService.id_role=='2' && contracts.approval_status == 'CXD'" type="button" class="btn btn-success" (click)="openDialogSendRequest()">Gửi Yêu Cầu Xét Duyệt</button> -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- ./wrapper -->
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<mat-dialog-content class="mat-typography">
+    <div>
+        <div>
+            <div>
+                <form #ContractForm="ngForm">
+                    <div class="card-body" style="height: 608px; width: 1000px;">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mã Khách Hàng</label>
+                            <input type="text" class="form-control" readonly name="customerId" [(ngModel)]="contract.id_customer">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tên Chủ Hợp Đồng</label>
+                            <input type="email" class="form-control" name="contractOwnerName" [(ngModel)]="contract.name_contract_owner">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Kỳ Hạn</label>
+                            <input type="email" class="form-control" name="period" [(ngModel)]="contract.payment_period">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Loại Bảo Hiểm</label>
+                            <input type="email" class="form-control" name="insuranceType" [(ngModel)]="contract.insurance_type">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mã Quyền lợi chính</label>
+                            <input type="email" class="form-control" name="insuranceId" [(ngModel)]="contract.id_main_benifit">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mã Bảng Minh Họa</label>
+                            <input type="email" class="form-control" name="illustrationId" [(ngModel)]="contract.id_illustration">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tổng Số Tiền Phải Trả</label>
+                            <input type="email" class="form-control" name="totalPayment" [(ngModel)]="contract.contract_total_value">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ngày Đăng Ký</label>
+                            <input type="date" class="form-control" name="signDate" readonly [(ngModel)]="contract.start_time">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ngày Hết Hạn</label>
+                            <input type="date" class="form-control" name="outOfDate" [(ngModel)]="contract.end_time">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tình trạng hoạt động</label>
+                            <input type="email" class="form-control" name="status" readonly [(ngModel)]="contract.status">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tình trạng xét duyệt</label>
+                            <input type="email" class="form-control" name="approval_status" readonly [(ngModel)]="contract.approval_status">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Hủy</button>
+    <button mat-button mat-dialog-close type="submit" (click)="onSubmit(ContractForm)">Lưu</button>
+</mat-dialog-actions>

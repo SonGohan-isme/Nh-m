@@ -1,0 +1,22 @@
+.custom-login {
+    background: url(https://i.pinimg.com/originals/39/80/d1/3980d11494cf721967a7918e435781df.jpg) no-repeat;
+    background-size: cover;
+}
+
+.card-custom {
+    padding: 19px;
+    height: fit-content;
+    width: 26%;
+    border-radius: 12px;
+    background-color: #676666e3 !important;
+}
+
+.btn-custom {
+    text-align: center;
+    padding: 0px;
+}
+
+.forget-pass {
+    margin-top: 14px;
+    text-align: start;
+}

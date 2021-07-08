@@ -1,0 +1,12 @@
+mat-dialog-actions {
+    position: relative;
+    bottom: -51px;
+}
+
+mat-dialog-content {
+    overflow: none;
+}
+
+.mat-tab-body-content {
+    overflow: none !important;
+}
